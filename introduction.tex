@@ -31,6 +31,48 @@ $$x^p+y^p=(x+y)(x+\omega y)\dots (x+\omega^{p-1}y)$$
 as required. This reformulation allows us to use the full artillery of ring theory on Fermat's Last Theorem.
 Gabriel Lamé believed he had a proof, which relied on the assumption that the ring of polynomials $\mathbb{Z}[x]$ is a unique factorisation domain (UFD): (FINISH)
 
-\section{Lamé's false proof}
-We summarise Lame's false proof.
+Something on UFDs...
+
+\section{Lamé's false proof for Type I solutions}
+We follow the account in \cite{Wright}. Assume $p>3$.
+Part I: (MISSING EQUATION). 
+
+Factorise $z=r_1r_2\dots r_n$ such that $z^p=r_1^p r_2^p\dots r_n^p$. Similarly write $(x+\omega^jy)=r_{1j}r_{2j}\dots r_{n_j j}$. Under the assumption that $\Z[\omega]$ is a UFD, $r_{ij}=ur_i$ for some $i$. We will additionally show that $x+\omega y$ does not share any irreducibles with $x+\omega^j y$ $j>1$. If $r$ divides both, then $$r|(x+\omega y) - (x+\omega^j y)=\omega y(1-\omega^{j-1})}$$
+Since $\omega$ is a unit with inverse $\omega^{p-1}$, this implies $r|y(1-\omega^{j-1})\implies r|y\prod_{j}(1-\omega^{j})=py$ by (MISSING). Since $p$,$y$ and $z$ are pairwise coprime, $py$ and $z$ are also coprime. By the Euclidean algorithm, there exist integers $m,n$ such that $$mpy+nz=1.$$ Then $r$ divides the LHS but not the RHS, a contradiction.
+
+Since $(x-\omega y)$ does not share any irreducibles with the $(x-\omega^j y)$'s, its unique factorisation must in fact be of the form $$(x-\omega y)=ur_{\alpha(1)}^p\dots r_{alpha(i)}=:u\alpha^p.$$ for some unit $u$ and $\alpha\in \Z[\omega]$.
+
+Part II: Under the assumption that $(x-\omega y)=u\alpha^p$, we finish the proof of Fermat. Note this part does not need the assumption that $\Z[\omega]$ is a UFD. 
+
+\begin{lemma}
+For any unit $u\in \Z[\omega]$, $$\frac{u}{\overline{u}}=\omega^k$$ for some $k\in \Z$. 
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
+Writing $\alpha=a_0+a_1\omega+\dots+a_{p-1}\omega^{p-1}, a_i\in \Z$ we find by multinomial expansion that $\alpha^p=a_0^p+\dots+a_{p-1}^p \mod p\Z[\omega]$, since every other term in the expansion is a multiple of $p$. Note by $\mod p\Z[\omega]$ we mean they are mapped to the same element under the projection $\Z[\omega]\rightarrow \Z[\omega]/p\Z[\omega]$. It follows that $$(x+\omega y)=ua\mod p\Z[\omega]$$ for some $a\in \Z$. By the lemma, $$(x+\omega y)=\omega^k\overline{(x+\omega y)}=\omega^k(x+\omega^{-1}y \mod p\Z[\omega]$$ for some $k\in \Z$. By equating coefficients as polynomials over $\omega$, we find $k=1$ so
+$$x+\omega y=x\omega+y \mod p\Z[\omega] \implies x=y\mod p.$$
+
+Rewriting Fermat's Last Theorem as $x^p+(-z)^p=(-y)^p$ then also gives $x=-z\mod p$. By Fermat's little theorem, the Last Theorem reduces to
+$$x+y=z\mod p$$
+By what we have shown, this implies
+$$3x=0\mod p$$
+Since $p\neq 3$, $p|x$, which is a contradiction since $(x,y,z)$ is a Type I solution.
+
+
 \section{Kummer's partial rectification}
+Kummer discovered a flaw in Part I of Lamé's proof. He managed to prove that $\Z[\omega]$ is NOT a UFD in general -- for example he showed that $\Z[e^{2\pi i/23}]$ is not a UFD \cite{Wright}. Every element of $\Z[\omega]$ \textbf{does} factor as a product of irreducibles, as we will later show by proving $\Z[\omega]$ is \textit{Noetherian}. However, this factorisation is not unique in general. This is a subtle point - in Part I we were only able to deduce that $x+\omega y=u\alpha^p$ by arguing that if $r$ is in the decomposition into irreducibles of $x+\omega y$ then it must be in the decomposition of $z^p$ as well - this is only true in a UFD.
+
+Kummer realised that there was a strictly weaker (see MISSING) condition to UFD that would make Lamé's Part I proof work. This condition is best explained in the framework of ideals, an invention of Dedekind \cite{Wright}. Dedekind showed that all the \textit{ideals} of $\Z[\omega]$ factorise uniquely into something called \defn{prime ideals} (see MISSING). (...)
+
+
+We define an equivalence relation on ideals $I$ of $\Z[\omega]$ by
+$$I\sim J \iff \alpha I=\beta J \text{ for some } \alpha,\beta\in \Z[\omega]$$
+This equivalence relation is clearly reflexive and symmetric. It is also transitive: if $\alpha I=\beta J$ and $\gamma J=\zeta K$ then $\alpha\gamma I=\alpha \gamma J=\alpha \zeta K$. As we show in (MISSING), the set of equivalence classes is finite, thus we can define \defn{class number} $h_p$ of $\Z[\omega],\omega=e^{2\pi i/p}$ as the size of this equivalence class. We then define
+
+\begin{definition}
+A \defn{regular prime} $p$ is a prime such that $p\not \divide h_p$.
+\end{definition}
+
+Kummer showed that Lamé's Part I proof can be rectified for regular primes. He also gave a proof for Type II solutions of regular primes. Kummer then went on to classify all the primes less than $100$, and more, showing that the only irregular primes less than $100$ are $37, 59$ and $67$ \cite{Wright}. Since $37^2>1000$, this proves Fermat's Last Theorem for all integers $3\leq n\leq 1000$ except for these three! This is remarkable progress compared to before Kummer's contribution, when Fermat's Last Theorem was only known for multiples of $3,4,5$ and $7$ (CITE).
