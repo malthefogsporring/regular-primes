@@ -1,0 +1,332 @@
+\chapter{Number fields and number rings}
+\section{Number fields}
+A \defn{number field} is a subfield of $\C$ that is a finite dimensional vector space over $\Q$. Examples include $\Q$ itself, $\Q[\omega]$ where $\omega=e^{2\pi i/p},p$ prime - the \defn{$p$-th cyclotomic field}, and $\Q[\sqrt{n}]=\{a+b\sqrt{n}:a,b\in \Q\}$. Non-examples include $\R$ and $\C$: both are vector spaces over $\Q$, but by virtue of being uncountable, could never have a finite basis over a countable field. The examples $\Q[\sqrt{n}]$ and $\Q[e^{2\pi i/p}]$ have the following in common: both $\sqrt{n}$ and $e^{2\pi i/n}$ satisfy a monic (leading coefficient $1$) polynomial over $\Q$. If every element of a ring $R$ satisfies a monic polynomial with coefficients in a subring $S$ we say $R$ is \defn{integral over} $S$. If a field $F$ is integral over a subfield $K$ we say $F$ is \defn{algebraic over} $K$. Thus we claim that $\Q[\sqrt{n}]$ and $\Q[e^{2\pi i/p}]$ are algebraic over $\Q$.
+
+\begin{example}\label{ex-sqrt-n-algebraic}
+$\sqrt{n}$ is algebraic over $\Q$, as it satisfies $f(x)=x^2-n$. If $n$ is not a square of another integer, then the two roots of $f$ are irrational. It follows that $f$ is irreducible, as it cannot written as a product of linear polynomials in $\Q$. If $n=m^2$ then $x^2-n$ is not irreducible, but $f(x)=x-m$ is.
+\end{example}
+\begin{example}\label{ex-omega-algebraic}
+$\omega=e^{2\pi i/p}$ is algebraic over $\Q$. It satisfies the monic $f(x)=x^p-1$. Note $f$ is not irreducible as it is divisible by $(x-1)$. We have already shown (\cref{eq-omega-polynomial}) that $\frac{x^p-1}{x-1}=(x-\omega)\dots(x-\omega^{p-1})=:g(x)$ when $x\neq 1$.
+We may additionally note
+$$(1+x+x^2+\dots+x^{p-1})(x-1)=(x+x^2+\dots+x^p)-(1+x+x^2+\dots+x^{p-1})=x^p-1.$$
+Therefore, 
+when $x\neq 1$,
+$$g(x)=(1+x+x^2+\dots+x^{p-1}),$$
+and since both functions are analytic on all of $\C$ they also equal on $x=1$. $g$ is therefore a monic rational polynomial satisfied by $\omega$. In fact, $g$ is irreducible: 
+\end{example}
+
+\begin{remark}
+It was important in \cref{ex-omega-algebraic} that $p$ is prime. $e^{2\pi i/n}$ for $n\in \N$ is certainly algebraic over $\Q$ since it satisfies $x^p-1$, but $1+x+x^2+\dots+x^{n-1}$ is \textbf{not} irreducible over $\Q$ in general. For example, $e^{2\pi i/6}$ satisfies $f(x)=x^2-x+1=0$: simply check $e^{2\pi i/3}-e^{\pi i/3}=2\cos(\pi/3)=1$. As we will shortly show, irreducible polynomials are always of minimal degree among polynomials annihilating $a$, so the existence of $f$ shows $(1+x+\dots+x^{5})$ is not irreducible.
+\end{remark}
+
+\cref{ex-sqrt-n-algebraic} and \cref{ex-omega-algebraic} have two things in common: in both cases the annihilating monic polynomial $f\in \Q[x]$ can be taken to be irreducible, and in both cases $\Q[a]$ is a number field. We will show that these properties hold in generality: if $a$ is algebraic over $\Q$, its monic annihilating polynomial can be taken to be irreducible, and $\Q[a]$ is a number field. We will also show that any $a\in Q[a]$ is also algebraic over $\Q$. Finally, we will show that any number field is of this form.
+
+\begin{lemma}\label{algebraic-satisfies-irreducible}
+Let $K$ be a number field and suppose $a\in \C$ is algebraic over $K$. Then $a$ satisfies a monic irreducible polynomial over $K$.
+\end{lemma}
+\begin{proof}
+Let $I\subset K[x]$ be the set of all polynomials annihilating $a$. By assumption, $I$ is non-empty. $I$ is an ideal: if $f,g\in K[x]$ annihilate $a$ then so does $f-g$. Additionally, if $f$ annihilates $a$ so does $fh$ for any $h\in K[x]$. $K[x]$ is a PID by \cref{F[x]-PID}, so $I=\langle f\rangle$ for some $f\in K[x]$. By dividing by the leading coefficient, we may take $f$ to be monic. Note $f$ is necessarily of minimal degree in $I$. Now let $f=gh$ and suppose WLOG that $g(a)=0$. Since $f$ is of minimal degree, $deg(f)=deg(g)$ so $h$ is a unit. Therefore $f$ is irreducible.  \end{proof}
+
+
+\begin{lemma}\label{algebraic-gives-field}
+Let $a\in \mathbb{C}$ be algebraic over a number field $K$ with monic irreducible polynomial $f$. Then $K/\langle f\rangle$ is a number field and $K/\langle f \rangle \iso K[a].$
+\end{lemma}
+\begin{proof}
+By \cref{PID-over-irreducible-is-field}, $K/\langle f\rangle$ is a field. It is finite dimensional over $K$ with basis $\{1,x,\dots,x^{n-1}\}$ where $n=deg(f)$, since any polynomial $g(x)$ with $deg(g)\geq n$ can reduced by the division algorithm to $g(x)=h(x)f(x)+r(x)$, $deg(r)<n$, such that $g(x)\sim r(x)$. It is therefore a number field.
+
+By definition, $K[a]$ is the image of the evaluation map $$ev_a:K[x]\rightarrow \C, f\mapsto f(a).$$ By the proof of \cref{algebraic-satisfies-irreducible}, $\langle f \rangle =ker(ev_a)$, so by the first isomorphism theorem for rings, there exists a ring isomorphism $\phi:K/\langle f \rangle \iso K[a]$. Since $K[x]/\langle f\rangle$ is a field, $K[a]$ is also a field: $\phi(g)$ has multiplicative inverse $\phi(g^{-1})$, so $\phi$ is actually a field isomorphism.
+\end{proof}
+
+\begin{remark}
+\cref{algebraic-satisfies-irreducible} and \cref{algebraic-gives-field} together prove that the $n-$th cyclotomic fields $\Q[\omega],\omega=e^{2\pi i/n}$ are number fields without explicitly constructing their monic irreducible polynomial over $\Q$. 
+\end{remark}
+
+Before we continue, let's note the following definition.
+\begin{definition}
+If $L$ and $K$ are number fields with $K\subset L$ then $L$ is said to be a \defn{field extension} of $K$. The degree of $F$ as a vector space over $K$ is denoted $[F:K]$. 
+\end{definition}
+Field extensions can be defined for general fields (not necessarily number fields), but we will always assume $K$ and $L$ are number fields. Note by assumption, $[L:\Q]$ and $[K:\Q]$ are finite - it follows that $[L:K]$ is finite.
+
+The following lemma will show that if $L$ is a field extension of $K$ then any $a\in L$ is algebraic over $K$. The statement and proof is a generalisation of a theorem from \cite{NumberFields}.
+
+\begin{lemma}\label{a-algebraic-over-finitely-generated-ring}
+Let $R$ be a ring and $M$ be a finitely-generated $R-$module. Then any $a\in M$ is algebraic over $R$.
+\end{lemma}
+\begin{proof}
+Let $M$ have generating set $\{\alpha_1,\alpha_2,\dots,\alpha_n\}$ and write $a\alpha_j=\sum a_{ij}\alpha_j$ for each $j$ to produce a matrix equation
+$$\begin{pmatrix}
+    a\alpha_1\\
+    a\alpha_2\\
+    \dots\\
+    a\alpha_n
+\end{pmatrix}=\begin{pmatrix} \sum a_{i1}\alpha_1\\\sum a_{i2}\alpha_2\\\dots\\\sum a_{in}\alpha_n
+\end{pmatrix}=: M\begin{pmatrix}\alpha_1\\\alpha_2\\\dots\\\alpha_n\end{pmatrix}$$
+In other words,
+\begin{equation}\label{eq-determinant-algebraic-over-R}(a I-M)\begin{pmatrix}\alpha_1\\\alpha_2\\\dots\\\alpha_n\end{pmatrix}=0.\end{equation}
+Therefore $\det(aI-M)=0$. Expanding out the determinant gives a monic degree $n$ polynomial over $R$ satisfied by $a$, as required.
+\end{proof}
+
+The following corollary follows from noting a finite-dimensional vector space over $K$ is also a finitely-generated $K-$module. 
+
+\begin{corollary}
+If $L$ is a field extension of $K$ then any $a\in L$ is algebraic over $K$.
+\end{corollary}
+
+\begin{example}\label{recipe-for-finding-polys-over-q}
+\cref{a-algebraic-over-finitely-generated-ring} gives a recipe for finding monic polynomials over $\Q$ satisfied by any element of a number field. For example,$\Q[\sqrt{2}]$ has basis $\{1,\sqrt{2}\}$ over $\Q$. For $a=1+\frac{1}{2}\sqrt{2}\in \Q[\sqrt{2}]$, \cref{eq-determinant-algebraic-over-R} reads
+$$\begin{pmatrix}
+(1+\frac{1}{2}\sqrt{2}) - 1 & -\frac{1}{2}\\
+-1 & (1+\frac{1}{2}\sqrt{2}) - 1
+\end{pmatrix}\begin{pmatrix}1\\\sqrt{2}\end{pmatrix}=0$$
+Setting the determinant to zero gives $(a-1)^2-\frac{1}{2}=0$ such that $1+\frac{1}{2}\sqrt{2}$ is algebraic over $\Q$ with monic annihilating polynomial $f(x)=x^2-2x+\frac{1}{2}$. In fact $f$ is the unique monic irreducible, as both its roots are irrational. It is important to note, however, that this process may yield a reducible polynomial.
+\end{example}
+
+We finish off the section by classifying all number fields. It turns out to be helpful to work not with the vector space structure of a number field $L$ over $\Q$, but rather with embeddings (injective field homomorphisms) $L\rightarrow \C$ that restrict to the identity on $\Q$. To explore this link, we need to borrow some results from Galois theory. We will roughly follow Appendix 2 of \cite{NumberFields}. 
+
+
+%\section{Normal field extensions}
+%The field $K=\mathbb{Q}[\sqrt[3]{2}]$ is entirely contained in the real line, and therefore does not contain all the conjugates of its elements (equivalently, the conjugates of $\sqrt[3]{2}$, as we will show). In particular, the irreducible $f(x)=x^3-2$ has three roots $\sqrt[3]{2},\sqrt[3]{2}\omega,\sqrt[3]{2}\omega^2$ where $\omega=e^{2\pi i/3}$ and of these only $\sqrt[3]{2}$ is real. There is, however, a field extension $L=\mathbb{Q}[\sqrt[3]{2},\sqrt[3]{2}\omega,\sqrt[3]{2}\omega^2]\subset \C$ of $K$ which contains all the conjugates of $\sqrt[3]{2}$. In fact, it contains the conjugates of all of $K$. Furthermore, this turns out to be possible for any number ring. The goal of this section is to prove this result. In doing so we will also classify all finite field extensions of number fields. Our treatment roughly follows Appendix 2 of \cite{NumberFields}.
+
+%The following result shows that instead of working with basis elements in $K$, we can work with embeddings (injective field homomorphisms) $L\rightarrow \C$ that restrict to the canonical inclusion on $K$.
+
+\begin{lemma}\label{monic-irreducible-has-all-roots}
+Let $\alpha\in \C$ be algebraic over a number field $K$ with monic irreducible $f$ of degree $n$. Then $f$ has $n$ distinct roots in $\C$.
+\end{lemma}
+\begin{proof}
+Since $\C$ is algebraically closed, $f$ has $n$ roots counted with multiplicity. We in fact claim these roots are pairwise distinct. Suppose $l(x)$ is linear with $f(x)=l(x)^2g(x)$. Taking derivates, $f'(x)=2l(x)g(x)+l(x)^2g(x)$, so $l|f'$. However, since $I=\langle f \rangle$ is maximal in $K[x]$ and $f'(x)\not \in I$, $\langle f, f'\rangle=K[x]$. It follows that $$1=f(x)g(x)+f'(x)h(x)$$ for some $g,h\in K[x]$. This is a contradiction since $l$ divides the RHS but not the LHS.
+\end{proof}
+
+\begin{definition}
+Let $a\in \C$ be algebraic with irreducible monic $f$ over a number field $K$. If $b\in \C$ is such that $f(b)=0$, then $a$ and $b$ are said to be \defn{conjugate over $K$}.
+\end{definition}
+
+Let us firstly note that conjugacy over $K$ is an equivalence relation. Additionally, if $\sigma:K\rightarrow \C$ is an embedding of a number field, then $\sigma(a)$ must be conjugate to $a$ by the properties of field homomorphisms:
+$$\sigma(f(a))=\sigma(\sum_{i=0}^n a_i a^i)=\sum_{i=0}^n a_i \sigma(a)^i.$$
+
+\begin{proposition}\label{extend-to-[L:K]-embeddings}
+Every embedding $K\rightarrow \C$ extends to exactly $[L:K]$ embeddings of $L$ in $\C$.
+\end{proposition}
+\begin{proof}
+Let $\{a_1,a_2,\dots,a_n\}$ be a basis for $L$ over $K$. Note $$L=span(a_1,\dots,a_n)\subset K[a_1,a_2,\dots,a_n]\subset L.$$ Therefore $L= K[a_1,a_2,\dots,a_n].$ Note furthermore that $$K[a_1,a_2,\dots,a_n]=K[a_1,\dots,a_{n-1}][a_n],$$ so we may work inductively on the basis elements. The result is clear if $L=K$, so set $J=K[a_1,a_2,\dots,a_{k}]$ and suppose every embedding of $K$ extends to $[J:K]$ embeddings of $J$. Let $L=J[a]$, $\sigma:J\rightarrow \C$ be an embedding
+and $f$ be the irreducible monic of $a$ over $J$. By \cref{monic-irreducible-has-all-roots}, $f$ has $n=deg(f)$ distinct roots in $\C$, which are the conjugates of $a.$ $\sigma(a)$ is necessarily one of these conjugates, and each choice of conjugate $b$ defines an embedding of $L$ restricting to $\sigma$ on $J$ in the following way:
+$$\sigma f(a)=\sigma \big(\sum_{i=0}^n c_ia^i\big)=\sum_{i=0}^n \sigma(c_i) b^i.$$
+Since there was no choice involved other than the choice $a\mapsto b$, every embedding of $L$ restricting to $\sigma$ on $J$ is of this form. There are therefore $n=deg(f)$ such embeddings. Since $L\iso J[x]/\langle f\rangle$, $[L:J]=deg(f)$. 
+
+We have shown that every embedding of $K$ extends to $[L:J][J:K]$ embeddings of $J[a]$. To finish the inductive proof, we need to show this equals $[L:K]$, let $\{b_1,b_2,\dots,b_n\}$ be a basis of $J$ over $K$ and $\{c_1,c_2,\dots,c_m\}$ be a basis of $L$ over $J$. This gives a basis $\{b_ic_j:1\leq i \leq n, 1 \leq j\leq m\}$ of size $nm$. It is easy to show this spans $L$, and 
+
+$$\sum_{i\leq n,j\leq m}a_{ij}b_ic_j=0\implies \sum_{j\leq m} \big(c_j \sum_{i\leq n}a_{ij}b_i\big)=0$$
+$$\implies \forall j, \sum_{i\leq n} a_{ij}b_i=0 \text{ (linear independence of the } c_j \text{'s)}$$
+$$\implies \forall (i,j), a_{ij}=0 \text{ (linear independence of the } b_i \text{'s)},$$
+giving linear independence. 
+\end{proof}
+
+Our desired corollary follows directly by considering the canonical inclusion $K\rightarrow \C$ as an embedding.
+\begin{corollary}
+There are $[L:K]$ embeddings of $L$ in $\C$ restricting to the canonical inclusion on $K$.
+\end{corollary}
+
+We now justify studying the field extensions of the form $K[a]$ by proving every finite degree number field extension is of this form.
+
+\begin{theorem}\label{classifying-finite-field-extensions}
+For every number field extension $K\subset L$, $L=K[\alpha]$ for some $\alpha \in L$.
+\end{theorem}
+\begin{proof}
+We proceed by induction on $n=[L:K]$. The proof is clear in the case $L=K=K[1]$. Now suppose $K[a_1,\dots,a_{n}]=K[\alpha]$ for some $\alpha \in L$ and let $L=K[\alpha,\beta]$ for $\beta\not\in K[\alpha]$. Let $0\neq a\in K$ and consider $\alpha+a\beta$. Suppose for sake of contradiction that $K[\alpha+a\beta]\neq L$. Then $[K[\alpha+a\beta]:K]<n$ where we recall $[K[\alpha+a\beta]:K]$ is the number of conjugates of $\alpha+a\beta$ over $K$. There are $n$ embeddings of $L$ restricting to the identity on $K$, and since each one takes $\alpha+a\beta$ to one of its conjugates, of which there are fewer than $n$, $\sigma(\alpha+a\beta)=\sigma'(\alpha+a\beta)$ for two such embeddings $\sigma,\sigma'$. Since these are field homomorphisms fixing $K$, 
+$$\sigma(\alpha)+a\sigma(\beta)=\sigma'(\alpha)+a\sigma'(\beta)$$
+so
+$$a=\frac{\sigma(\alpha)-\sigma'(\alpha)}{\sigma(\beta)-\sigma'(\beta)}$$
+Note the denominator is always nonzero since if $\sigma(\beta)=\sigma'(\beta)$ then $\sigma(\alpha)=\sigma'(\alpha)$ as well, which would imply $\sigma$ and $\sigma'$ equal on all of $L$ which we assumed they didn't.
+
+Since there are only finitely many choices for $\sigma(\alpha),\sigma(\alpha'),\sigma(\beta)$ and $\sigma(\beta')$,
+$$K[\alpha+a\beta]\neq L$$
+for only finitely many $a\in K$. Choosing any other $a$ will give the desired result.
+\end{proof}
+
+\begin{example}
+Consider $L=\Q[i,\sqrt{3}]$ as a field extension of $\Q$. The conjugates of $i$ over $\Q$ are $\pm i$ and the conjugates of $\sqrt{3}$ over $\Q$ are $\pm \sqrt{3}$. Since $\frac{\pm 2i}{\pm 2\sqrt{3}}\not \in \Q$, \cref{classifying-finite-field-extensions} gives that $L\iso \Q[i+a\sqrt{3}]$ for any non-zero $a\in \Q$.
+$$$$
+\end{example}
+
+\begin{example}
+Let us show that $$\Q[\sqrt{2},\sqrt{3},\sqrt{4},\dots,\sqrt{n}]=\Q[\sqrt{2}+\sqrt{3}+\sqrt{5}+\dots\sqrt{p}]$$ where $p$ is the largest prime $p\leq n$. It is clear that $$\Q[\sqrt{2},\sqrt{3},\sqrt{4},\dots,\sqrt{n}]=\Q[\sqrt{2},\sqrt{3},\sqrt{5},\dots,\sqrt{p}]$$ since $\sqrt{nm}\in \Q[\sqrt{n},\sqrt{m}]$. We may work inductively. $\Q[\sqrt{2},\sqrt{3}]=\Q[\sqrt{2}+\sqrt{3}]$ by a similar argument to the previous example. Let $s_q=\sqrt{2}+\sqrt{3}+\dots+\sqrt{q}$ and consider $\Q[s_q,\gamma]$ where $\gamma$ is the next prime after $q$. Let $\sigma,\sigma'$ be two embeddings of $\Q[s_q,\gamma]$ fixing $\Q$. Since these are field homomorphisms sending conjugates to conjugates, $\sigma(s_q)-\sigma'(s_q)=\pm 2 \sqrt{2}\delta_2+\pm 2\sqrt{3}\delta_3+\dots+\pm 2\sqrt{q}\delta_q$, where $\delta_i=0$ or $1$ and not all $\delta_i$ are $0$. Since $$1\neq \frac{\pm 2\sqrt{2}\delta_2+\pm2 \sqrt{3}\delta_3+\dots+\pm 2\sqrt{q}\delta_q}{\pm 2\sqrt{\gamma}},$$
+\cref{classifying-finite-field-extensions} gives $\Q[s_q,\gamma]\iso \Q[s_q+\gamma]$.
+\end{example}
+
+\section{Number rings}
+Inside a number field sit the \defn{algebraic integers}: the elements integral over $\Z$. Letting $\A$ be the algebraic integers in $\C$, we define a \defn{number ring} as the ring $\A\cap \Q[a]$ of algebraic integers in a number field. For Fermat's Last Theorem, we are particularly interested in the number ring $\A\cap \Q[\omega],$ where $\Q[\omega]$ is the $p$-th cyclotomic field for $p$ prime. Of course, we would like to prove that number rings are indeed rings. As shown in \cite{NumberFields}, this follows from the fact that $a\in \C$ is an algebraic integer iff $\Z[a]$ is a finitely generated $\Z-$module.
+\begin{proposition}\label{algebraic-int-iff-finitely-generated}
+$a\in \C$ is an algebraic integer if and only if $\Z[a]$ is a finitely generated $\Z$-module.
+\end{proposition}
+\begin{proof}
+$(\implies)$ $\Z[a]$ is clearly a $\Z-$module for any $a$. Let $f\in \Z[x]$ be a monic annihilating polynomial of $a$ of degree $n$. Then I claim $\{1,a,a^2,\dots,a^{n-1}\}$ is a generating set for $\Z[a]$. For an arbitrary element $\alpha=\sum_i^m a_ia^i\in \Z[a]$ where $m\geq n$ we can let $g(x)=a_mx^{m-n}f(x)$ s.t. $g(a)=0$. It follows that $$\alpha=\sum_i^{m}a_ia^i=\sum_i^{m}a_ia^i-g(a),$$ and by construction the RHS can be rewritten in the form $\sum_i^{m-1}a_i'a^i$. We may repeat this process $m-(n-1)$ times until $\alpha$ is written in the form $\alpha=\sum_i^{n-1} a_i^*a^i$.
+
+$(\impliedby)$ follows directly from \cref{a-algebraic-over-finitely-generated-ring}.
+\end{proof}
+
+
+\begin{corollary}\label{number-rings-are-rings}
+Number rings are rings.
+\end{corollary}
+\begin{proof}
+We show the algebraic integers $\A\in \C$ form a ring. By the subring test, it is enough to show number rings are closed under multiplication and subtraction, and contain $1$. $1$ is clearly an algebraic integer. If $\Z[a]$ and $\Z[b]$ are finitely generated, then so is $Z[a,b]$ with generating set $\{a_ib_j\}$ where $\{a_i\}$ and $\{b_j\}$ are the finite generating sets of $\Z[a]$ and $\Z[b]$ respectively. Since $a+b,ab\in \Z[a,b]$ they are both algebraic by \cref{a-algebraic-over-finitely-generated-ring}.
+
+Finally, we note that the intersection of two rings is always a ring, therefore $\A\cap R$ is a ring for any ring $R\subset \C$.
+\end{proof}
+\begin{example}
+As in \cref{recipe-for-finding-polys-over-q}, we can use the proof of  \cref{a-algebraic-over-finitely-generated-ring} as a recipe for finding monic polynomials over $\Z$ satisfied by an algebraic integer $a$, given a generating set for $\Z[a]$. For example, take $a=i+\sqrt{2}$. $\Z[i]$ has generating set $\{1,i\}$ and $\Z[\sqrt{2}]$ has generating set $\{1,\sqrt{2}\}$. By the proof of $\cref{number-rings-are-rings}$, $i+\sqrt{2}\in\Z[i,\sqrt{2}]$ which has generating set $\{1,i,\sqrt{2},\sqrt{2}i\}$. Then \cref{eq-determinant-algebraic-over-R} reads
+$$\begin{pmatrix}
+(i+\sqrt{2}) & -1 & -1 & 0\\ 
+1 & i+\sqrt{2} & 0 & -1\\
+-2 & 0 & i+\sqrt{2} & -1\\
+0 & -2 & 1 & i+\sqrt{2}
+\end{pmatrix}\begin{pmatrix}1\\i\\\sqrt{2}\\i\sqrt{2}\end{pmatrix}=0$$
+
+The determinant of this matrix expands to
+$$a^4-2a^2+9$$
+so $i+\sqrt{2}$ is an algebraic integer satisfying monic $f(x)=x^4-2x^2+9$ over $\Z$.
+\end{example}
+
+We finish with a useful fact about monics satisfied by algebraic integers.
+\begin{lemma}\label{lemma-monics-are-Z}
+If $f\in \Z[x]$ is monic and $f=gh$ where $g,h\in \Q[x]$ are monics, then in fact $g,h\in \Z[x]$.
+\end{lemma}
+\begin{proof}
+Omitted, see \cite{NumberFields}.
+\end{proof}
+
+\begin{remark}\label{algebraic-integer-irreducible-poly-has-integer-coefficients}
+Note this shows that if $a\in \Q[\alpha]$ is an algebraic integer, then its monic irreducible polynomial over $\Q$ has integer coefficients. If $a$ satisfies $f\in \Z[x]$ and has monic irreducible $g\in \Q[x]$ then $f=gh$ for some $h\in \Q[x]$ since $f\in \langle g \rangle$, and so $g\in \Z[x]$ by the lemma.
+\end{remark}
+
+\section{The p-th cyclotomic fields}
+We are now ready to prove a remarkable and impactful result which is core to Kummer's proof of Fermat's Last Thereom.
+\begin{theorem}\label{algebriac-integers-are-Z[w]}
+For the $p-$th cyclotomic fields $\Q[\omega]$,
+$$\A\cap\Q[\omega]= \Z[\omega].$$
+\end{theorem}
+In fact this statement is true for all $n$-th cyclotomic fields \cite{NumberFields}, but the proof of this is more involved and not needed for our purposes. Let us first note that every element in $\Z[\omega]$ is an algebraic integer. This follows directly from \cref{algebraic-int-iff-finitely-generated} since $\Z[\omega]$ is a finitely generated $\Z$-module with generating set $\{1,\omega,\omega^2,\dots,\omega^{p-1}\}$.We proceed as in \cite{NumberFields}, using the $[K:\Q]$ embeddings of a number field $K$ in $\mathbb{C}$ fixing $\Q$ to define the \defn{norm} and \defn{discriminant} of $K$. 
+
+\begin{definition}
+Let $n=[K:\Q]$ and let $\sigma_1,\sigma_2,\dots,\sigma_n$ be the $n$ embeddings of $K$ in $\C$ fixing $\Q$. Let $\alpha\in K$. %The \defn{trace} of $K$  is the function $$\alpha\mapsto\sigma_1(\alpha)+\sigma_2(\alpha)+\dots+\sigma_n(\alpha).$$
+The \defn{norm} $N$ of $K$ is the function
+$$\alpha\mapsto\sigma_1(\alpha)\sigma_2(\alpha)\dots \sigma_n(\alpha).$$
+\end{definition}
+
+The first goal is to show that the codomain of $N$ s in fact $\Q$. Furthermore, we wish to show that  $N(\alpha)\in \Z$ if $\alpha$ is an algebraic integer. Firstly note since the $\sigma_i$ are field homomorphisms that fix $\Q$, $$N(r\alpha\beta)=r^nN(\alpha)N(\beta).$$
+
+\begin{lemma}\label{norm-of-alg-int-is-integer}
+If $\alpha\in K$ is algebraic over $\Q$, then $N(\alpha)\in \Q.$ If $\alpha$ is an algebraic integer, then $N(\alpha)\in \Z$.
+\end{lemma}
+\begin{proof}
+Let $\alpha$ be integral over $R$ where $R=\Q$ or $\Z$. By \cref{algebraic-integer-irreducible-poly-has-integer-coefficients}, the monic irreducible polynomial of $\alpha$ over $\Q$ has coefficients in $R$. First suppose $K=\Q[\alpha]$. Then each embedding $\sigma_i$ of $K$ fixing $\Q$ is uniquely defined by a choice of conjugate of $\alpha$ aka root of $f$. Therefore $N(\alpha)$ is the product of the roots of $f$, which is $\pm\frac{a_0}{a_n}=\pm a_0\in R$ where $a_n=1$ since $f$ is monic.
+
+For general $K,$ each embedding fixing $\Q$ restricts to one of these on $\Q[\alpha]$. Furthermore, each $\sigma_i$ extends to $n:=[K:\Q[\alpha]]$ embeddings of $K$. Therefore 
+$$N(\alpha)=\sigma_1(\alpha)^n\sigma_2(\alpha)^n\dots\sigma_k(\alpha)^n=(\sigma_1(\alpha)\dots\sigma_k(\alpha))^n\in R.$$
+\end{proof}
+
+%\begin{itemize}
+    %\item %$T(r\alpha+\beta)=rT(\alpha)+T(\beta)$ for $\alpha,\beta\in K, r\in \Q$.
+    %\item $N(r\alpha\beta)=r^nN(\alpha)N(\beta)$.
+%\end{itemize}
+%In particular, $T$ is linear in $\Q$. 
+
+We will return to the norm later. Our next goal is to show that number rings are free abelian as additive groups. Our goal will be to sandwich number rings between two free abelian groups of the same dimension. This follows from the fundamental theorem of finitely generated abelian groups, which we state without proof.
+
+\begin{theorem}
+If $A$ is a finitely generated abelian group then
+$$A\iso \Z^n\times\Z_{k_1}\times \Z_{k_2}\times \dots \times \Z_{k_m}$$
+for some $k_1|k_2|\dots|k_m$.
+\end{theorem}
+\begin{proof}
+Omitted. See \cite{GroupTheory}.
+\end{proof}
+
+\begin{corollary}
+Every subgroup $G$ of a finitely generated free abelian group $A$ is free.
+\end{corollary}
+\begin{proof}
+This follows from the fundamental theorem by noting $G$ cannot have any $n-$torsion, since $A$ does not.
+\end{proof}
+
+It should be clear that $G$ cannot have a greater dimension than $A$. As argued in \cite{NumberFields}, it follows that if the number ring contains and is contained by free abelian groups of rank $n$, then it must itself be free abelian of rank $n.$
+
+Next, we would like to show that any number field has a basis consisting entirely of algebraic integers. Such a basis is called an \defn{integral basis}. We fill in the details of the following proof from \cite{NumberFields}.
+
+\begin{proposition}
+Any number field $R=\Q[\alpha]$ has an integral basis.
+\end{proposition}
+\begin{proof}
+Take any basis $\{\alpha_1,\alpha_2,\dots,\alpha_n\}$. Let $f\in \Q[x]$ be the monic irreducible satisfied by $\alpha_1$ and of degree $n$. Let
+$$f=\sum_{i=0}^{n}\frac{a_i}{b_i}x^i$$
+where the $\frac{a_i}{b_i}$ are written in lowest terms and $a_n=b_n=1$. Let $d_1=lcm(b_0,b_1,\dots,b_n)$. Then $\alpha_1$ satisfies $$d_1^n\cdot f(a)=\sum_{i=0}^n a_i \frac{d_1^{n-i}}{b_i}(d_1\alpha_1)^i=0.$$
+By construction, the $\frac{d_1^{n-1}}{b^i}$ are integers, and the $n-$th coefficient is $1$. This defines a monic polynomial in integer coefficients satisfied by $d_1\alpha_1$. Repeating this process for each $\alpha_i$ gives a set of algebraic integers $\{d_1\alpha_1,\dots,d_n\alpha_n\}$ which is also a basis for $R$.
+\end{proof}
+
+As argued in \cite{NumberFields}, this shows that $R$ contains the free abelian group of rank $n$
+
+$$d_1\alpha_1\Z\times d_2\alpha_2\Z\times \dots \times d_n\alpha_n\Z\times.$$
+
+\begin{definition}
+For any $n-$tuple of elements $(\alpha_1,\alpha_2,\dots \alpha_n)$ of $K$, the \defn{discriminant} is 
+$$disc(\alpha_1,\alpha_2,\dots,\alpha_n)=|[\sigma_i(\alpha_j)]|^2$$
+i.e. the square of the discriminant of the matrix with $(i,j)$th element $\sigma_i(\alpha_j)$. We also introduce the shorthand $disc(\omega)$=$disc(1,\omega,\omega^2,\dots,\omega^{p-1})$ for $p=e^{2\pi i/p}$.
+\end{definition}
+
+\begin{prop}\label{number-ring-contained-in-free-abelian-group}
+Fix an integral basis $\{\alpha_1,\alpha_2,\dots,\alpha_n\}$ of $R=\A\cap\Q[\alpha]$. Let $d=disc(\alpha_1,\dots,\alpha_n)$. Then any $r\in R$ can be written as
+$$r=\frac{m_1\alpha_1+\dots+m_n\alpha_n}{d}$$ for integers $m_i$ s.t. $d|m_i^2$.
+\end{prop}
+\begin{proof}
+Omitted. See \cite{NumberFields} pg. 29, Theorem 9
+\end{proof}
+This shows that $\A\cap\Q[\alpha]\subset \frac{\alpha_1}{d}\Z\times \frac{\alpha_2}{d}\Z\times \dots \times \frac{\alpha_n}{d}\Z$. Let us summarise what we have shown in the following corollary.
+\begin{corollary}\label{number-rings-are-Noetherian}
+Any number ring $\A\cap\Q[\alpha]$ is a finitely generated $\Z$-module. In particular, number rings are Noetherian by (MISSING).
+\end{corollary}
+
+Next we give a proof of the following exercise from \cite{NumberFields}
+
+\begin{prop}\label{disc-invariant-on-generating-sets}
+If $\{\beta_1,\dots,\beta_n\}$ and $\{\gamma_1,\dots,\gamma_n\}$ are subsets of a number field $K$ generating the same additive subgroup $G\leq K$ of a number field, then $$disc(\beta_1,\beta_2,\dots,\beta_n)=disc(\gamma_1,\gamma_2,\dots,\gamma_n).$$
+\end{prop}
+\begin{proof}
+(...)
+\end{proof}
+As remarked in \cite{NumberFields}, this justifies defining $disc(G):=disc(\beta_1,\dots,\beta_n)$ where the $\beta_i$'s generate $G$, since $disc$ is invariant on sets generating the same group. In particular, $disc(R)$ is an invariant of any number ring $R$.
+
+We are now ready to give the proof of \cref{algebriac-integers-are-Z[w]}. We follow the approach of \cite{NumberFields}, first proving two lemmas.
+\begin{lemma}
+Let $\omega=e^{2\pi i/p}$ for some prime $p.$ Then $$\Z[\omega]=\Z[1-\omega]$$ $$disc(\omega)=disc(1-\omega)$$
+(remember to define this!)
+\end{lemma}
+\begin{proof}
+It is clear that $\Z[1-\omega]\subset\Z[\omega]$ by expanding an arbitrary polynomial in $1-\omega$ to give a polynomial in $\omega$. Additionally, since $\omega=1-(1-\omega)$, an arbitrary polynomial in $\omega$ can be expanded to a polynomial in $(1-\omega).$ Therefore $\Z[\omega]\subset \Z[1-\omega]$. 
+The second equality then follows directly from \cref{disc-invariant-on-generating-sets}.
+\end{proof}
+We give some more details of the proof in \cite{NumberFields}.
+\begin{lemma}\label{product-of-1-omegak-p}
+$$\prod_{k=1}^{p-1}(1-\omega^k)=p$$
+\end{lemma}
+\begin{proof}
+We have already shown in \cref{ex-omega-algebraic}
+$$\prod_{k=1}^{p-1}(x-\omega^k)=1+x^2+\dots+x^{p-1}$$
+so the result follows by setting $x=1$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{algebriac-integers-are-Z[w]}]
+
+Let $\alpha\in R=\A\cap\Q[\omega].$ By \cref{number-ring-contained-in-free-abelian-group}, 
+$$\alpha=\frac{m_0+m_1(1-\omega)+\dots+m_{p-1}(1-\omega)^{p-1}}{d}$$ where $m_i\in \Z$, $d=disc(1-\omega)=disc(\omega)$ and $d|m_i^2$. Note $$disc(\omega)=(...)=p^p.$$ If $\A\cap\Q[\omega]\neq \Z[\omega]=\Z[1-\omega]$ then there must exist such an $\alpha$ where $d\not | m_i$ for some $i$. We may let $i$ be the smallest $i$ where this holds, and, by subtracting $\frac{m_0}{d}+\frac{m_1}{d}(1-\omega)+\dots+\frac{m_{i-1}}{d}(1-\omega)^{i-1}\in \Z[1-\omega]\subset R$, and multiplying by $p^{p-1}$, assume $$\alpha=\frac{m_i(1-\omega)^i+\dots+m_{p-1}(1-\omega)^{p-1}}{p}$$ with $p\not | m_i$. By \cref{product-of-1-omegak-p}, $$\frac{p}{(1-\omega)^{i+1}}=\frac{\prod_{k=1}^{p-1} (1-\omega^k)}{(1-\omega)^{i+1}}=(\prod_{k=1}^{i+1}\frac{1-\omega^k}{1-\omega})\prod_{k=i+1}^{p-1}(1-\omega^k).$$
+This product lies in $\Z[1-\omega]$ since the $k$ roots of $(x^k-\omega^k)$ are $\omega,\omega^2,\dots,\omega^k$ giving the identity $(x-\omega^k)=(x-\omega)(x-\omega^2)\dots(x-\omega^k)$ which for $x=1$ gives $\frac{1-\omega^k}{1-\omega}=(x-\omega^2)\dots(x-\omega^k)\in \Z[1-\omega]\subset R.$
+
+It follows that $\alpha \frac{p}{(1-\omega)^{i+1}}\in R.$ Note
+
+$$\alpha \frac{p}{(1-\omega)^{i+1}}=\frac{m_i}{1-\omega}+m_{i+1}+m_{i+2}(1-\omega)+\dots+m_{p-1}(1-\omega)^{p-i-2}\in R$$
+By subtracting everything else, which is in $\Z[1-\omega]\subset R$, we find $\frac{m_i}{1-\omega}\in R$.
+
+Since $\frac{m_i}{1-\omega}$ is an algebraic integer, taking the norm over $\Q[\omega]$, $N(\frac{m_i}{1-\omega})=\frac{N(m_i)}{N(1-\omega)}\in \Z$. $N(1-\omega)=\prod(1-\omega^k)$ (TODO: show these are the conjugates of $1-\omega$) $=p$ by \cref{product-of-1-omegak-p}. Additionally, $N(m_i)=m_i^p$ since there are $p$ embeddings of $\Q[\omega]$ fixing $\Q$ and each fixes $m_i$. It follows that $p|m_i^p$. However, $p\not | m_i | m_i^p$ by assumption, a contradiction.
+
+
+\end{proof}
+
+

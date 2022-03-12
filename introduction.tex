@@ -1,0 +1,36 @@
+\chapter{Introduction}
+In theorems that are easy to state and difficult to prove, Fermat's Last Theorem likely takes the crown. The Theorem, first stated in 1637, was never proven by Fermat, although he claimed to have a "a truly marvelous proof" (CITE), which the margins of his copy of Arithmetica were "too narrow to contain." It is very doubtful that he had such a proof - indeed, many mathematicians since then have thought they had a proof, only to find a slight error making the entire proof crumble. A correct proof was not published until 1995, by Sir Andrew Wiles, and this proof was an epic achievement bringing together our most advanced understanding of elliptic curves (CITE). Despite the difficulty of the proof, Fermat's Last Theorem is so easy to state, a 9-year-old can understand it.
+
+\begin{theorem}[Fermat]
+The equation
+\begin{equation}\label{Fermat}
+    x^n+y^n=z^n
+\end{equation}
+has no integer solutions for $n>2$.
+\end{theorem}
+
+The case $n=2$ is Pythagoras' Theorem, which has integer solutions. For example, $(x,y,z)=(3,4,5)$ works. It is enough to prove Fermat's Last Theorem for the case that $n$ is an odd prime. This is because a counter-example for $n=pm$ a composite number also gives a counter-example for a prime:
+$$(x^m)^p+(y^m)^p=(z^m)^p.$$
+(Technically, we should also prove the case $n=4$, as we know Fermat does not work for $n=2$ - however this turns out not to be hard). We can additionally assume that in a solution $(x,y,z)$, $x$, $y$ and $z$ are all coprime. Indeed, if they all three share a factor, we can divide by that factor to get another counter-example. If instead, two of three share a factor $n$, then $\cref{Fermat}$ will not hold $(\Mod n)$. We therefore reduce the proof to two types of solutions:
+\begin{itemize}
+    \item (type 1): $p$ does not divide either of $x,y,z$.
+    \item (type 2): $p$ divides exactly one of $x,y,z$.
+\end{itemize}
+
+The case $n=3$ is simple enough to prove using just undergraduate level number theory. First, suppose $(x,y,z)$ is a type 1 solution. Then $x,y,z$ are all $\pm1 \Mod 3$, so $$x^3+y^3\neq z^3 (\Mod 3).$$
+(FINISH PROOF)
+
+(PROVE n=4 - exercise 15 on pg 8 in Number Fields).
+
+These cases are truly the only trivial ones - proving Fermat's Theorem for $p>3$ requires more work. Type 1 solutions turn out to be the most interesting to analyse, so from now on we will assume $(x,y,z)$ is a Type 1 solution. Our first trick will be to turn $\cref{Fermat}$ into a multiplicative equation. Letting $\omega=e^{2\pi i/p}$, we factor \cref{Fermat} to
+$$(x+y)(x+\omega y)\dots(x+\omega^{p-1} y)=z^p.$$
+This follows from noting $1,\omega,\dots,\omega^{p-1}$ are unique (NOTE: This is what makes the $p$ case work more easily than the $n$ case!!!) solutions to $t^p-1=0$, and since $\mathbb{C}$ is algebraically closed, this implies
+\begin{equation}\label{eq-omega-polynomial}t^p-1=(t-1)(t-\omega)\dots (t-\omega^{p-1}).\end{equation}
+Replacing $t$ with $\frac{-x}{y}$ gives
+$$x^p+y^p=(x+y)(x+\omega y)\dots (x+\omega^{p-1}y)$$
+as required. This reformulation allows us to use the full artillery of ring theory on Fermat's Last Theorem.
+Gabriel Lamé believed he had a proof, which relied on the assumption that the ring of polynomials $\mathbb{Z}[x]$ is a unique factorisation domain (UFD): (FINISH)
+
+\section{Lamé's false proof}
+
+\section{Kummer's partial rectification}

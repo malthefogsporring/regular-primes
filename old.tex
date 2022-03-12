@@ -1,4 +1,67 @@
+
+
 \section{Notes}
+
+\subsection{Normal field extensions}
+We again follow \cite{NumberFields}
+\begin{definition}
+A field extension $L$ of $K$ is said to be \defn{normal} if each of the $[L:K]$ embeddings of $L$ restricting to the inclusion on $K$ are automorphisms.
+\end{definition}
+
+Note this equivalent to $L$ containing all its conjugates over $K$: if $a\in L$ and $a\sim b$ then there is an embedding of $L$ fixing $K$ such that $a\mapsto b$ -- take any extension, guaranteed by \cref{extend-to-[L:K]-embeddings}, of the embedding $K[a]\rightarrow \C : \sum a_i a^i\mapsto \sum a_i b^i$. Since this embedding is an automorphism, $b\in L$. Since $a,b$ were arbitrary, $L$ contains all its conjugates over $K$. 
+
+Conversely, by \cref{classifying-finite-field-extensions} we can set $L=K[\alpha]$. Every embedding fixing $K$ is entirely determined by a choice of conjugate $\alpha\mapsto \beta$. If $\beta \in L$, then $$\sigma(\sum a_i \alpha^i)=\sum a_i \beta^i\in L$$
+so this embedding is an automorphism.
+
+
+\begin{remark} (BAD PLACE TO PUT THIS REMARK)
+In the next theorem, we will consider nested field extensions $K\subset L \subset M$. The inclusion symbol is used somewhat erroniously, in actuality we want to have injective field homomorphisms $K\rightarrow L \rightarrow M$. If $m,n\in M$ are conjugate over $L$, they are necessarily conjugate over $K$: let $f$ be the monic irreducible over $L$ and let $m$ and $n$ satisfy monic irreducibles $g$ and $h$ respectively over $K$. Since $g,h\in \langle f\rangle_L$, $$g=h+jf.$$
+Since $g(m)=jf(m)=0, h(m)=0$. However, $g$ was the unique monic irreducible with this property so $g=h$.
+
+The converse, however, is not true. Take for example $\Q\subset \C\subset \C$. $i,-i$ are conjugate over $\Q$ with minimal polynomial $f(x)=x^2+1$, however they are not conjugate over $\C$.
+\end{remark}
+
+\begin{theorem}
+Every finite field extension $K\subset L$ can be extended to a finite normal field extension $K\subset L \subset M$ (normal over both $K$ and $L$).
+\end{theorem}
+\begin{proof}
+By \cref{classifying-finite-field-extensions} we may write $L=K[\alpha_1]$ for some $\alpha_1 \in L$. Let $\alpha_1,\alpha_2,\dots,\alpha_n$ be the $n=[L:K]$ conjugates of $\alpha_1$ over $K$. Let $M=K[\alpha_1,\alpha_2,\dots,\alpha_n]$ be a field extension of $L$ (and by extension $K$) via the inclusion $L\rightarrow M$. We need to show $M$ contains all its conjugates over $K$, and we will then get the second part for free. Indeed, any embedding of $M$ restricting to the inclusion on $L$ also restricts to the inclusion on $K$ and would therefore be an automorphism.
+
+By construction, $M$ contains all the conjugates of $\alpha_1$. Let $\sigma$ be an embedding of $M$ fixing $K$, and let $x=\sum_i \sum_j a_{ij}\alpha_j^i$ be an element of $M$. $\sigma$ maps $x$ to one of its conjugates, and as $\sigma$ is a field homomorphism, $\sigma(x)=\sum_i \sum_j a_{ij}\sigma(\alpha_j)^i\in M$. Therefore $M$ contains all its conjugates over $K$.
+\end{proof}
+\subsection{The cyclotomic fields $\Q[\omega]$}
+For proving Fermat's Last Theorem, we will be interested in understanding the $p$-th cyclotomic fields. 
+
+ Our approach follows that given in \cite{NumberFields} chapter 2.
+
+Now we want to study the $m^{th}$ cyclotomic number fields $\Q[\omega]$. If two numbers $\alpha,\beta\in \mathbb{C}$ satisfy the same monic polynomial over a subfield $K$, we say they are \defn{conjugate}. The following Theorem and its Corollary are proven in \cite{NumberFields}. We give adapted proofs filling in a few missing details.
+\begin{theorem}\label{conjugates-of-Q[w]}
+In the $m^{th}$ cyclotomic number fields $\Q[\omega]$, $\omega^k, 1\leq k\leq m, (k,m)=1$ are exactly the conjugates to $\omega$. 
+\end{theorem}
+\begin{proof}
+Let $f$ be the monic irreducible polynomial of $\omega$. (NOTE: have I proven that $\omega$ is algebraic over $\Q$? or in fact that the same is true for any complex \#?) Since $\omega$ is a root of $x^m-1$ and $f$ is irreducible (minimal), $f$ divides $x^m-1$:
+$$x^m-1=f(x)g(x)$$
+for some $g(x)$. By \cref{lemma-monics-are-Z}, both $f$ and $g$ are in $\Z[x]$.
+
+For our proof, it is enough to show that for every $k$ with $(k,m)=1$ and every prime $p$ not dividing $m$, $\omega^{kp}$ is conjugate to $\omega^k=:\theta$. If we show this, then the general result follows inductively. I.e. if $k$ is s.t. $(k,m)=1$ and the prime decomposition of $k$ is $k=p_1^{a_1}p_2^{a_2}\dots p_n^{a_n}$ then
+$$\omega\sim\omega^{p_1}\sim\omega^{p_1^2}\sim\dots\sim\omega^{p_1^{a_1}}\sim\omega^{p_1^{a_1}p_2}\sim\dots \omega^{p_1^{a_1}p_2^{a_2}\dots p_n^{a_n}}.$$
+
+We want to show that $f(\theta^p)=0$. Suppose for sake of contradiction that $g(\theta^p)=0$. We get another monic polynomial $g^*(x):=g(x^p)$ over $\mathbb{Z}$ which $\theta$ is a root of. Therefore $g^*=fh$ for some $h$ which again will be in $\mathbb{Z}$ by \cref{lemma-monics-are-Z}. Now we may reduce all coefficients mod $p$ to get monics $\overline{g^*}=\bar{f}\bar{h}$. By multinomial expansion, $\overline{g}(x^p)=\bar{g}(x)^p$ since $$(\sum_{i=0}^n a_ix^i)^p=\sum_{k_1+k_2+\dots+k_n=p}{p\choose k_1,k_2,\dots ,k_n}\prod_{i=0}^n(a_ix^i)^{k_i}$$
+The multinomial coefficient $${p\choose k_1,k_2,\dots ,k_n}=\frac{p!}{k_1!k_2!\dots k_n!}$$
+will be a product of $p$ (and hence be $0$ in $\Z_p$) iff none of the $k_i$ equal $p$. Conversely, if $k_i=p$ then $k_j=0$ for $j\neq i$. Therefore in $\Z_p$,
+$$\overline{g}(x)^p=(\sum_{i=0}^n a_ix^i)^p=\sum_{i=0}^n(a_ix^i)^p=\sum_{i=0}^n a_i^p (x^p)^i=\sum_{i=0}^n a_i (x^p)^i=\overline{g}(x^p)$$
+where the second-to-last equality follows by the fact that the multiplicative group of units $\Z_p^{\times}$ is cyclic of order $p-1$. In this argument we have implicitly used that reducing coefficents $\mod p$ is a ring homomorphism, so $\overline{\sum a_ix^i}=\sum \overline{a_i}x^i.$
+
+We have that $(\overline{g})^p=\overline{f}\overline{h}$. By \cref{Z_p[x]-is-UFD}, $\Z_p$ is a UFD, so both sides of the equation have the same factorisation into irreducible elements. This gives an irreducible $j\in Z_p[x]$ that divides both $\overline{g}$ and $\overline{f}$. Therefore $j^2|\overline{f}\overline{g}=x^m-1$. Writing $x^m-1=j^2k$ for $k\in \Z_p[x]$ and taking derivatives of both sides gives $\overline{m}x^m=2jj'k+j^2k'$ such that $j|\overline{m}x^m$ in $\Z_p$ (remember this trick - we will use it again). Since $(m,p)=1$, $\overline{m}\neq 0$. Since $\overline{m}x^m$ has factorisation $\overline{m}x^m=\overline{m}x\cdot x\cdot \dots \cdot x$, and since $\Z_p$ is a UFD, in fact $j$ must be a monomial itself. However $j|x^m-1$, a contradiction.
+\end{proof}
+
+\begin{corollary}\label{Q[w]-degree}
+$[\Q[\omega]:\Q]=\varphi(m)$, where $\varphi(m)$ is the number of integers $1\leq k\leq m$ with $(k,m)=1$.
+\end{corollary}
+
+\begin{proof} Let $f$ be the monic irreducible polynomial of $\omega$. $\Q[\omega]\iso \Q[x]/\langle f \rangle$ so its degree is the degree of $f$. By \cref{monic-irreducible-has-all-roots}.
+\end{proof}
+
 \subsection{Prequisites}
 Rings are commutative with $1$.
 \subsubsection{The field of fractions}

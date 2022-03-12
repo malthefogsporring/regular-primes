@@ -1,4 +1,7 @@
-\documentclass[titlepage,12pt,a4paper]{article}
+\documentclass[12pt]{report} 
+\usepackage[MMath]{edmaths}
+\flushbottom
+%\documentclass[titlepage,12pt,a4paper]{article}
 %\documentclass[12pt]{report} 
 %\usepackage[y4project]{edmaths} 
 \usepackage[utf8x]{inputenc}
@@ -62,23 +65,39 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\A}{\mathbb{A}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\ideal}{\vartriangleleft}
 
+\newcommand{\matricno}{s1745523}
+\newcommand{\projectno}{UG771}
 \title{Kummer's Theory of Regular Primes}
-\author{Malthe Sporring\\ Supervised by James Wright}
+\author{Malthe Fog Sporring}
 \date{\today}
 
 
+
 \begin{document}
+\pagenumbering{roman}
 \maketitle
 
+\begin{abstract} ... Abstract text ... \end{abstract}
+\declaration
+\dedication{...dedication text...}
+%\let\chapter\section\tableofcontents
 \tableofcontents
+%\addcontentsline{toc}{chapter}{Contents}
 \newpage
-\input{notes}
-%\newpage
+\pagenumbering{arabic}
+\input{introduction}
+\input{rings}
+\input{number-fields}
+\input{dedekind}
+\input{regular-primes}
+\newpage
 %\addcontentsline{toc}{section}{Appendix}
 %\section*{Appendix}
-%\newpage
-%\addcontentsline{toc}{section}{References}
+\newpage
+\addcontentsline{toc}{chapter}{References}
 \bibliography{bibtex}
 \end{document}
