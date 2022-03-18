@@ -2,33 +2,6 @@
 
 \section{Notes}
 
-\subsection{Normal field extensions}
-We again follow \cite{NumberFields}
-\begin{definition}
-A field extension $L$ of $K$ is said to be \defn{normal} if each of the $[L:K]$ embeddings of $L$ restricting to the inclusion on $K$ are automorphisms.
-\end{definition}
-
-Note this equivalent to $L$ containing all its conjugates over $K$: if $a\in L$ and $a\sim b$ then there is an embedding of $L$ fixing $K$ such that $a\mapsto b$ -- take any extension, guaranteed by \cref{extend-to-[L:K]-embeddings}, of the embedding $K[a]\rightarrow \C : \sum a_i a^i\mapsto \sum a_i b^i$. Since this embedding is an automorphism, $b\in L$. Since $a,b$ were arbitrary, $L$ contains all its conjugates over $K$. 
-
-Conversely, by \cref{classifying-finite-field-extensions} we can set $L=K[\alpha]$. Every embedding fixing $K$ is entirely determined by a choice of conjugate $\alpha\mapsto \beta$. If $\beta \in L$, then $$\sigma(\sum a_i \alpha^i)=\sum a_i \beta^i\in L$$
-so this embedding is an automorphism.
-
-
-\begin{remark} (BAD PLACE TO PUT THIS REMARK)
-In the next theorem, we will consider nested field extensions $K\subset L \subset M$. The inclusion symbol is used somewhat erroniously, in actuality we want to have injective field homomorphisms $K\rightarrow L \rightarrow M$. If $m,n\in M$ are conjugate over $L$, they are necessarily conjugate over $K$: let $f$ be the monic irreducible over $L$ and let $m$ and $n$ satisfy monic irreducibles $g$ and $h$ respectively over $K$. Since $g,h\in \langle f\rangle_L$, $$g=h+jf.$$
-Since $g(m)=jf(m)=0, h(m)=0$. However, $g$ was the unique monic irreducible with this property so $g=h$.
-
-The converse, however, is not true. Take for example $\Q\subset \C\subset \C$. $i,-i$ are conjugate over $\Q$ with minimal polynomial $f(x)=x^2+1$, however they are not conjugate over $\C$.
-\end{remark}
-
-\begin{theorem}
-Every finite field extension $K\subset L$ can be extended to a finite normal field extension $K\subset L \subset M$ (normal over both $K$ and $L$).
-\end{theorem}
-\begin{proof}
-By \cref{classifying-finite-field-extensions} we may write $L=K[\alpha_1]$ for some $\alpha_1 \in L$. Let $\alpha_1,\alpha_2,\dots,\alpha_n$ be the $n=[L:K]$ conjugates of $\alpha_1$ over $K$. Let $M=K[\alpha_1,\alpha_2,\dots,\alpha_n]$ be a field extension of $L$ (and by extension $K$) via the inclusion $L\rightarrow M$. We need to show $M$ contains all its conjugates over $K$, and we will then get the second part for free. Indeed, any embedding of $M$ restricting to the inclusion on $L$ also restricts to the inclusion on $K$ and would therefore be an automorphism.
-
-By construction, $M$ contains all the conjugates of $\alpha_1$. Let $\sigma$ be an embedding of $M$ fixing $K$, and let $x=\sum_i \sum_j a_{ij}\alpha_j^i$ be an element of $M$. $\sigma$ maps $x$ to one of its conjugates, and as $\sigma$ is a field homomorphism, $\sigma(x)=\sum_i \sum_j a_{ij}\sigma(\alpha_j)^i\in M$. Therefore $M$ contains all its conjugates over $K$.
-\end{proof}
 \subsection{The cyclotomic fields $\Q[\omega]$}
 For proving Fermat's Last Theorem, we will be interested in understanding the $p$-th cyclotomic fields. 
 

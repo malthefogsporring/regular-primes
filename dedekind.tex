@@ -1,24 +1,205 @@
-\chapter{Dedekind Domains}
-After our tour of ideals, Noetherian rings, number fields and number rings, we are now ready to bring everything back to Kummer's partial proof of Fermat's Last Theorem. Recall that 
+\chapter{Dedekind Domains}\label{sec-dedekind}
+After our tour of ideals, Noetherian rings, number fields and number rings, we are now ready to bring everything back to Kummer's partial proof of Fermat's Last Theorem. Recall that we need to show the ideals in $\Z[\omega]$ factorise uniquely into a product of prime ideals. We will show that this property is always held for a certain type of integral domains, called \defn{Dedekind domains}. Furthermore, we will show all number rings are Dedekind, so that in particular, $\Z[\omega]=\A\cap\Q[\omega]$ is a Dedekind domain. Our approach is inspired by \cite{Wright}. We start by briefly discussing the field of fractions of a ring $R.$
 
-We are now ready to introduce the notion of a \defn{Dedekind domain}. This ad-hoc-seeming definition turns out to be exactly the condition needed for (FILL OUT), as we will show in section (MISSING). Our main goal for this section is to prove that number rings are Dedekind domains (or only p-th cyclotomics???)
+\section{The field of fractions}
+For any integral domain $R$ sitting inside a field $L$, what is the smallest subfield containing $R$? There is always a subfield $F=\{ab^{-1}:a\in R, 0\neq b\in R\}$ which contains $R$. Additionally, any subfield of $L$ containing $R$ necessarily contains $F$. It follows that $F$ is the intersection of all subfields of $R$, that is, the smallest subfield containing $R$. $F$ is called the field of fractions of $R$ and can be defined (up to isomorphism) even when a field containing $R$ is not given, in the following way: Define an equivalence relation $\sim$ on $R\times (R\setminus\{0\})$ by $(a,b)\sim (c,d)\iff ad=bc$. The reader should compare this with the equivalence relation on fractions in $\Q:\frac{a}{b}=\frac{c}{d}\iff ad=bc$. $\sim$ is clearly reflexive, and is symmetric because $R$ is commutative. It is transitive because if $(a,b)\sim (c,d)$ and $(c,d)\sim (e,f)$
+then $$ad=bc\implies fad=bcf\implies fad=bed\implies af=be$$
+where the last equality follows from $R$ being an integral domain. Clearly when $R=\Z$, the equivalence classes under $\sim$ give $\Q$ as a set. Inspired by the field structure on $\Q$, we can show that these equivalence classes for any $R$ define a field, called the field of fractions.
 
-\begin{definition}
-(...)
-\end{definition}
+\begin{definition}\label{field-of-fractions}
+The \defn{field of fractions} of an integral domain $R$ is the field given by the set $R\times (R\setminus\{0\})/\sim$ and with addition/subtraction defined by $$[a,b]\pm[c,d]=[ad\pm cb,bd]$$
+and multiplication by
+$$[a,b]\times [c,d]=[ac,bd].$$
+Multiplicative inverses when $[a,b]\neq [0,b]$ are
+$$[a,b]^{-1}=[b,a].$$
+The $0$ element is $[0,1]$ and the $1$ element is $[1,1]$.\end{definition}
 
+It is easy to see that $^{-1}$ is well-defined. Let us confirm that $\pm$, $\times$ are well-defined, letting $[a,b]\sim [a',b']$ and $[c,d]\sim [c',d']$. Trivially, $[a,b]\sim [ka,kb]$ for any $0\neq k$. Then
+$$[a,b]\pm[c,d]=[ad\pm cb,bd]=[(ad\pm cb)b'd',(bd)b'd']=[ab',bb']+[cd',dd']$$
+$$=[a'b,bb']+[c'd,dd']=[a',b']+[c',d'].$$
 
+Similarly, $$(ac,bd)\sim (a'c',b'd')\iff acb'd'=a'c'bd$$
+Which is true since $ab'=a'b$ and $cd'=c'd$ by assumption.
 
-\begin{proposition}
-Any number ring $R=\A\cap \Q[\alpha]$ is a Dedekind domains.
-\end{proposition}
+It is tedious (and not hard) to show that $+$ and $\times$ satisfy all properties of a field, in particular closure, commutativity, associativity, and satisfying identities. We will finish by showing the distributive property: $$[a,b]\times ([c,d]+[e,f])=[a,b]\times [cf+de,df]=[acf+ade,bdf]$$$$=[(ac)(bf)+(ae)(bd),(bd)(bf)]=[ac,bd]+[ae,bf]=[a,b]\times [c,d]+[a,b]\times[e,f].$$
+
+Clearly the field of fractions of $R$ defined in \cref{field-of-fractions} and the field of fractions defined at the start of the section are isomorphic. It follows that the field of fractions satisfies a universal property.
+
+\begin{prop}[Universal property of the field of fractions]
+For every embedding $R\rightarrow L$ of an integral domain into a field, there is a unique injection from the field of fractions $K$ of $R$ making the following triangle commute
+% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBoBGAXVJADcBDAGwFcYkQAlEAX1PU1z5CKchWp0mrdgGkefEBmx4CRUcXEMWbRCABiPcTCgBzeEVAAzAE4QAtkjIgcEJACYaOelkbsAFhAgAazlLG3tER2ckUScvHx1-IJCQaztojxdEd1jvPwDg7kpuIA
+\[\begin{tikzcd}
+                                   & L                 \\
+R \arrow[ru, hook] \arrow[r, hook] & K \arrow[u, hook]
+\end{tikzcd}\]
+\end{prop}
 \begin{proof}
-\begin{itemize}
-    \item ($R$ is Noetherian). This was shown in  \cref{number-rings-are-Noetherian}.
-    \item Every nonzero prime ideal of $R$ is maximal.
-    \item ($R$ is integrally closed )
-\end{itemize}
+We have already shown existence, simply map $K$ into the field of fractions of $R$ in $L$. Since $\phi:K\rightarrow L$ is a field homomorphism, $\phi(\frac{a}{b})=\frac{i(a)}{i(b)}$ where $i:R\rightarrow L$ is the given injection, so in fact $\phi$ is uniquely defined.
 \end{proof}
+
+This is the formal sense in which $K$ is the smallest field containing an isomorphic image of $R.$
+
+Given any ring $R$ we may always pass to its field of fractions $K$. We may then look at the ring of elements in $K$ integral over $A$: this is called the \defn{integral closure} of $A$ in $K$. We have shown this forms a ring in the case of the integral closure of $\Z$ in $\C$ in \cref{number-rings-are-rings}, and it is easy to see the proof can be extended in generality. If the integral closure of $A$ in its field of fractions is $A$, we say $A$ is \defn{integrally closed}. We will want to show that number rings $\A\cap K$ are integrally closed. Inspired by \cite{Wright}, we start by showing the field of fractions of $\A\cap K$ is $K$ itself. We show this in more generality.
+
+\begin{lemma}\label{integral-closure-of-number-ring}
+If $A$ is a ring with field of fractions $K$ and $L$ is a field extension of $K$ with $L$ algebraic over $K$, then the field of fractions of the integral closure $B$ of $A$ in $L$ is $L$.
+\end{lemma}
+\begin{proof}
+Let $x\in L$. Since $L$ is algebraic over $K$, we can find $k_i\in K$ such that
+$$k_0+k_1x+\dots k_{n-1}x^{n-1}+x^n=0.$$
+Writing the $k_i$ as fractions $\frac{a_i}{b_i}, a_i,b_i\in A$, then multiplying the equation by $b:=b_1b_2\dots b_n$ we get a monic in $bx$ with coefficients in $A$, so $bx$ is integral over $A$. Writing $bx=\beta \in B$, we see $x=\frac{\beta}{b}$ is in the field of fractions of $B$. Since $x$ was arbitrary, $L$ is a subset of the field of fractions of $B$. Since $B\subset L$, the field of fractions of $B$ is a subset of the field of fractions of $L$, so these are equal.
+
+\cite{Wright}
+\end{proof}
+
+In the case of $\A\cap K$, $A=\Z$ with field of fractions $K=\Q$. $L=K$ is a field extension and the integral closure of $L$ over $\Z$ is $\A\cap K$. It easily follows that number rings are integrally closed.
+
+\begin{prop}\label{number-ring-int-closed}
+Number rings are integrally closed.
+\end{prop}
+\begin{proof}
+Considering $\Z\subset \A\cap K \subset X$ where $X$ is the integral closure of $\A\cap K$ in $K,$ and note $\A\cap K$ is integral over $\Z$ and $X$ is integral over $\A\cap K$, both by definition. By \cref{integral-is-transitive}, $X$ is integral over $\Z$. Since $X\subset K$ by \cref{integral-closure-of-number-ring}, in fact $X\subset \A\cap K$ as required.
+\cite{Wright}
+\end{proof}
+
 \section{Number rings are Dedekind domains}
 
-\section{Unique factorisation of ideals}
+\begin{definition}
+An integral domain $R$ is a \defn{Dedekind domain} if
+\begin{enumerate}[(1)]
+    \item $R$ is Noetherian.
+    \item Every nonzero prime ideal of $R$ is maximal.
+    \item $R$ is integrally closed.
+\end{enumerate}
+\end{definition}
+
+We would like to show that number rings $R=\A\cap K$ are Dedekind domains.
+We have already verified that number rings are Noetherian (\cref{number-rings-are-Noetherian}) and integrally closed \cref{number-ring-int-closed}. It remains to show that a nonzero prime ideal of $R$ is maximal.  This is true in much more generality, for any ring integral over a ring with this property. In particular, $\A\cap K$ is integral over $\Z$ by definition, and the nonzero prime ideals of $\Z$ are exactly $p\Z$ for $p$ prime, which are also the maximal ideals.
+
+\begin{lemma}
+If an integral domain $R$ is integral over a subring $S$ with property (2) of a Dedekind domain, then $R$ also has property (2).
+\end{lemma}
+\begin{proof}
+Let $P$ be a prime ideal of $R$. $Q:=P\cap S$ is also an ideal of $S$ (closed by multiplication by $s\in S$ and subtraction since elements of both $P$ and $S$ are) and in fact it is a prime ideal of $S$: $xy\in Q\cap S\implies x$ or $y$ is in $P$ ($P$ is prime) and since both were assumed to be in $S$, $x$ or $y$ is in $Q.$ Furthermore, $Q$ is nonzero: let $0\neq p\in P$ and write $$p^n+s_{n-1}p^{n-1}+\dots +s_{0}=0, s_i\in S, n>0,$$ since $R$ is integral over $S$. We may assume $s_0\neq 0$ by cancelling out the smallest common power $p$ if necessary ($R$ is an integral domain). 
+Now  $s_0\in S$ and also $s_0=-(p^n+s_{n-1}p^{n-1}+\dots+ps_1)\in P$, so $0\neq s_0\in Q.$
+
+By assumption, $Q$ is maximal in $S$. Now consider the following diagram, where $p:S\rightarrow R/P$ is the composition of the inclusion and the projection map.
+% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAGUQBfU9TXfIRQBGclVqMWbAEoB6AArdeIDNjwEiZYePrNWiDrICK3cTCgBzeEVAAzAE4QAtkjIgcEJACZquqQYAdALQsEGoGOgAjGAZ5fnUhEHssCwALHCU7RxdENw8kUXc6LAY2SDBWX0l9FUyQB2dvanzEQr8aoJgADyw4HDgAQgACVLCQCOjY+ME2ZLSMrgouIA
+\[\begin{tikzcd}
+S \arrow[d, "\pi"'] \arrow[r, "p"] & R/P \\
+S/Q \arrow[ru, "\exists! h"']      &    
+\end{tikzcd}\]
+Since $Q\subset P$, $p(Q)=0$, so the universal property of factor rings gives a unique map $h:S/Q\rightarrow R/P$ commuting with the diagram. $h$ is the map $a+Q\mapsto a+P$, which is injective since $a-b\in P\implies a-b\in Q\subset P$. Since $S/Q$ is a field by maximality, $im(h)$ is a subfield of the integral domain $R/P.$ It follows that $R/P$ is integral over $S/Q$: let $r\in R$ satisfy $r^n+s_{n-1}r^{n-1}+\dots s_0$. Applying the canonical ring homomorphism $\rho:R\rightarrow R/P$ to this equation, and noting that commutativity in the diagram gives $\rho(s)=h\pi(s)$ for $s\in S$, gives a monic
+$$(r+P)^n+(s_{n-1}+Q)(r+p)^{n-1}+\dots+(s_0 +Q)$$
+where we have written $s+Q$ instead of $h(s+Q)$. Therefore $R/P$ is integral over $S/Q.$ In fact, this forces $R/P$ to be a field itself by the next lemma. It follows that $P$ is maximal as required.
+
+\cite{Wright}.\end{proof}
+
+\begin{lemma}
+An integral domain $R$ integral (aka algebraic) over a field $F$ is a field.
+\end{lemma}
+\begin{proof}
+Let $r\in R$ with monic irreducible $f$. Then $F[r]$ is a $F-$vector space of degree $deg(f)$ by \cref{algebraic-gives-field}. The $F$-linear map $f:F[r]\mapsto F[r] x\mapsto rx$ has kernel $0$ since $R$ is an integral domain, and is therefore injective. By the rank-nullity theorem, $f$ is surjective, in particular there is an $r'$ with $f(r')=rr'=1.$ This gives an inverse to $r$. \cite{Wright}
+\end{proof}
+
+\section{Dedekind domains have Property I}
+
+We have shown that $\Z[\omega]$ is a number ring, and that this implies it is a Dedekind domain. We now show that all Dedekind domains have the desired \textbf{Property I}: ideals factorise uniquely into a product of prime ideals. Recall we define a multiplication of two ideals $I,J$ of an integral domain $R$ as $IJ=\langle ij :i\in I, j\in J \rangle$, the smallest ideal containing all the products of elements from $I$ and $J$. We can also define a sum on ideals: $I+J=\langle I\cup J\rangle=\{i+j:i\in I, j\in J\}$: the smallest ideal containing both $I$ and $J$. It is trivial to see that this set is an ideal. Additionally, it contains $I\cup J$ and any set containing $I\cup J$ must contain this set by closure under addition.
+
+We start by proving a weaker version of Property I:
+\begin{lemma}\label{noetherian-ideals-contain-finite-product-of-primes}
+Every ideal of a Noetherian ring $A$ contains a finite product of nonzero prime ideals.
+\end{lemma}
+\begin{proof}
+Suppose there is an ideal $I$ of $A$ without this property. Since $A$ is Noetherian, the collection of all such ideals has a maximal element $J.$ Let $0\neq xy\in J$ be such that $x,y\not \in J$. It follows that $J\subset J+\langle x \rangle$ and $J\subset J+ \langle y\rangle$ where these inclusions are proper. By maximality of $J$ among ideals missing the sought property, both $J+\langle x \rangle$ and $J+\langle y \rangle$ contain finite products of prime ideals, say $P_1P_2\dots P_n$ and $Q_1Q_2\dots Q_m$ respectively. Then $\prod_{i,j} P_iQ_j$ is a finite product of prime ideals of $(J+\langle x\rangle)(J+\langle y\rangle)$, which is the smallest ideal containing $$\{(j+rx)(j'+sy):j,j'\in J, r,s\in R\}=\{jj'+jsy+j'rx+rsxy:j,j'\in J, r,s\in R\}\subset J$$
+since $J$ is closed under addition, multiplication by an element of $R$ and contains $xy$. This contradicts $J$ not containing a finite product of prime ideals.
+\cite{Wright}
+\end{proof}
+
+
+We now show that under ideal multiplication, the \defn{fractional ideals} of a Dedekind domain form a group.
+
+\begin{definition}
+Let a ring $R$ have field of fractions $K$. A \defn{fractional ideal} of $R$ is an $A-$submodule $M$ of $K$ with the property that there exists a $0\neq c\in A$ such that $cM\subset A$.
+\end{definition}
+
+We will call ideals of $A$ \defn{integral ideals} to distinguish from fractional ideals. Recall an ideal of $A$ is exactly an $A-$submodule of $A$. The definition is motivated by considering the $\Z-$submodules of $\Q$ of the form $M=\{m\frac{a}{c}:m\in \Z\}$ for some fixed $a$ and $c$. Of course, $cM=a\Z\subset \Z$. For this reason, $c$ is called a \defn{common denominator} of $M$.
+
+Let us build a group structure on fractional ideals. $A$ will play the role of the identity since $AM=M$ for any $A-$module. We need to find the multiplicative inverse of every fractional ideal. Inspired by the approach in \cite{Wright}, we first prove this property for maximal ideals, then integral ideals, then fractional ideals. The Noetherian property of $A$ will play a key role here.
+
+\begin{lemma}\label{ideals-form-group-inclusion-lemma}
+Let $R$ be a Dedekind domain and $M,N$ be two (integral) ideals of $R$, where $M$ is prime, such that
+$$N\subset NM^{-1}\subset R.$$
+Then the first inclusion is proper.
+\end{lemma}
+\begin{proof}
+We will show that $M^{-1}\subsetneq R$. Then if $N=NM^{-1}$, $M^{-1}$ is integral over $R$ by \cref{a-algebraic-over-finitely-generated-ring}, so $M^{-1}\subset R$ by the algebraic closure of $R$, a contradiction. It suffices to find a single element $m\in M^{-1}$ with $m\not \in R.$
+
+Let $0\neq a\in M$ and let $P_1\dots P_r$ be a product of primes contained in $\langle a \rangle$ by cref{noetherian-ideals-contain-finite-product-of-primes}. Assume $r$ is minimal. Then $P_1\dots P_n\subset M$, so since $M$ is prime, $P_i\subset M$ for some $i$. By relabeling, let $i=1$. Since $P_1$ is maximal, $P_1=M$. Now by assumption, $P_2\dots P_n\not \subset \langle a \rangle$, so we may choose some $b\in P_2\dots P_n\setminus \langle a \rangle$. Letting $d=ba^{-1},$ we notice $b\not \in aR\implies d\not \in R$. However, $dM=ba^{-1}P_1\in a^{-1}P_1\dots P_n\subset a^{-1}\langle a \rangle =A$, so $d\in M^{-1}$ as required.
+\cite{Wright}
+\end{proof}
+
+\begin{lemma}\label{fractional-ideals-of-dedekind-form-group}
+Any fractional ideal $M$ of a Dedekind domain $R$ has a multiplicative inverse.
+\end{lemma}
+\begin{proof}
+We do the proof in three stages.
+
+\textbf{$M$ is maximal:} We will show that the fractional ideal $M^{-1}=\{k\in K: kM\subset R\}$ is the multiplicative inverse to $M$. $M^{-1}$ is certainly an $R-$submodule: if $kM\subset R$ the same is true for $akM, a\in R$ and $(k+c)M$ where $cM\subset R$. The remaining properties of being an abelian group are similarly easily checked. The common denominator of $M^{-1}$ is any nonzero $m\in M$. We also have $M^{-1}M\subset R$. In fact $M\subset M^{-1}M$ as well, since $1\in M^{-1}$. By \cref{ideals-form-group-inclusion-lemma}, $M\neq M^{-1}M$, so by the maximality of $M$, $M^{-1}M=R$. 
+
+\textbf{$M$ is integral.} Suppose $M$ is integral and does not have a multiplicative inverse. Let $N$ be maximal among all such ideals, and let $J$ be a maximal ideal containing $N$. Both exist since $R$ is Noetherian. Since $J$ is maximal, it has multiplicative inverse $J^{-1}$. Since $1\in J^{-1}$, s $$N\subset NJ^{-1}\subset JJ^{-1}=A.$$ The first inclusion is proper by \cref{ideals-form-group-inclusion-lemma}. Since $N$ was maximal among integral ideals without multiplicative inverse, $NJ^{-1}$ has inverse $C$, so $N$ has inverse $J^{-1}C$.
+
+\textbf{$M$ is a fractional ideal}. We have (by definition) a $c\in R$ s.t. $cM$ is integral, and therefore has an inverse $N$. It follows that $cN$ is an inverse to $M$. \cite{Wright}
+\end{proof}
+
+Thus, the definition of a Dedekind domain, which at first seemed arbitrary, has now been shown to have the very useful property of 
+\cref{fractional-ideals-of-dedekind-form-group}. In fact, more is true: Dedekind domains are equivalent to this property, as shown in \cite{Wright}. We now show that Dedekind domains have the sought-after Property I of unique factorisation of ideals into prime ideals. We will adopt the convention that $I^0=A$ for any ideal, and give the ideal $I=R$ of $R$ the unique factorisation into prime ideals $R=P^0$ for some prime ideal $P$. This is similar to allowing $1$ to have the unique prime decomposition $1=2^0$. The factorisation will be unique up to reordering and multiplication by $A=P^0$, i.e., zero powers of prime ideals, just like the unique factorisation of positive integers into a product of primes.
+
+\begin{theorem}[Dedekind domains have Property I] \label{dedekind-domains-property-I}
+
+Any ideal $I$ of a Dedekind domain $R$ has a unique factorisation into prime ideals
+$I=P_1^{a_1}P_2^{a_2}\dots P_n^{a_n}$.
+\end{theorem}
+\begin{proof}
+Let us first prove existence. We have already adopted a convention when $I=R$, so suppose $I$ is a proper ideal that does not factorise into a product of prime ideals. Let $J$ be maximal among all such ideals and let $M$ be a maximal ideal containing $J$. Note $J\neq M$ since maximal ideals are always prime by \cref{max-is-prime} so in particular, maximal ideals always factorise into a product of primes. By maximality of $J$, $M$ factorises into a product of prime ideals $M=P_1P_2\dots P_n$. Now let $N=JM^{-1}$ so $J=NM.$
+From the proper containment
+$$J\subset M$$
+we get the proper containment
+$$N=JM^{-1}\subset MM^{-1}=R.$$
+Additionally, multiplying by $N=JM^{-1}$ on the proper containment
+$$M\subset R$$
+gives the proper containment
+$$J\subset N\subset R$$
+By maximality of $J$, $N$ factorises into a product of prime ideals. Since both $M$ and $N$ have this property, so does their product $J$ - a contradiction.
+
+For uniqueness, suppose an ideal $I$ has two factorisations
+$$I=P_1P_2\dots P_n=Q_1Q_2\dots Q_m.$$
+Recall $IJ\subset P\implies I\subset P$ or $J\subset P$ (CITE) for prime $P$. By induction,
+$Q_1\dots Q_m\subset P_1\implies Q_i\subset P_1$ for some $i$. By relabeling, let $i=1$. Since prime ideals are maximal, $Q_1=P_1$. By taking inverses, we may write $P_2...P_n=Q_2\dots Q_m$. We continue until we have $P_i\dots P_n=A$ (WLOG $n\geq m$) which implies $A\subset P_j$ for each $i\leq j \leq n$, a contradiction. Therefore $n=m$ and the $P_i$'s can be reordered to give the $Q_j$'s.
+
+\cite{Wright}
+\end{proof}
+
+The factorisation can be extended to general fractional ideals $M$ of $R$. We know there exists a $c\in R$ with $cM\subset R$. Therefore $cM$ has a unique factorisation into prime ideals $cM=P_1^{a_1}\dots P_n^{a_n}$. Additionally, $M=\langle \frac{1}{c}\rangle cM$ where $\langle \frac{1}{c}\rangle=\{\frac{r}{c}:r\in R\}$ is the fractional ideal generated by $\frac{1}{c}$. If the prime decomposition of  $\langle c \rangle$ is $\langle c \rangle=Q_1^{b_1}\dots Q_m^{b_m}$ then $$\langle \frac{1}{c}\rangle=\{\frac{r}{q_1,\dots q_m}:q_i\in Q_i^{b_i}, r\in R\}=Q_1^{-b_1}\dots Q_m^{-b_m}$$ where $Q_i^{-b_i}=\{\frac{r}{q_i}:q_i\in Q_i^{b_i},r\in R\}$. Therefore
+$$M=\frac{P_1^{a_1}\dots P_n^{a_n}}{Q_1^{b_1}\dots Q_m^{b_m}}.$$
+After cancelling out any common prime ideals in the numerators and denominators we get a factorisation
+$$M=\prod p^{f_p}$$
+where the product goes over all prime ideals of $R$, $f_p\in \Z$ and $f_p$ is nonzero for only finitely many $p.$ This factorisation is also unique, as the cancellation trick from the proof of \cref{dedekind-domains-property-I} also works for fractional ideals.
+
+As remarked in \cite{Wright}, a prime ideal $P$ appears in the prime decomposition of an ideal $I$ if and only if $I\subset P$. $(\implies)$ is clear, and for $(\impliedby)$ we have $I=PP_1\dots P_n\subset P$, therefore $P_i\subset P$ for some $i$ since $P$ is prime and so by the maximality of $P_i, P=P_i$. This remark will allow us to show the prime decompositions of $\langle x +\omega y\rangle$ and $\langle x +\omega^j y\rangle$ in the proof of Fermat's Last Theorem have no prime ideals in common, which we record as the following remark.
+
+\begin{remark}\label{Dedekind-returns-to-type-1}
+Suppose $P$ appears in both the unique prime decompositions of $\langle x +\omega y\rangle$ and $\langle x +\omega^j y\rangle$ for some $1<j\leq p$. Both ideals are then subsets of $P$, so $(x+\omega y)-(x+\omega^j y)\subset P$. We can then follow Lamé's argument almost word-for-word to find that $py\in P$, and find integers $m,n$ with $mpy+nz=1$. Note that $z\in P$ since $P$ also appears in the prime decomposition of $z$. It follows $mpy+nz\in P$, however $1\not \in P $ as $P\neq \Z[\omega]$. This gives the desired contradiction. \cite{Wright} 
+\end{remark}
+
+We finish by showing that multiplication of fractional ideals satisfies a distributive law. This is a basic fact for integral ideals which is easily extended to fractional ideals. Note that the definition of a sum of ideals $I+J=\{i+j:i\in I, j\in J\}$ can easily be extended to fractional ideals. The proof given here is my own.
+
+\begin{lemma}\label{distributive-law-for-ideals}
+Let $I,J,K$ be fractional ideals of a Dedekind domain $R$. Then $$I(J+K)=IJ+IK$$
+\end{lemma}
+\begin{proof}
+Since $J\subset J+K$, $IJ\subset I(J+K)$. Similarly, $IK\subset I(J+K)$. It follows that $$IJ+IK\subset I(J+K).$$
+
+Now let $i\in I, j\in J, k\in K$ and note $$i(j+k)=ij+ik\in\{a+b:a\in \langle \{ij:i\in I, j\in J\}\rangle,b\in \langle \{ik:i\in I, k\in K\}\rangle \}=IJ+IK$$
+Since $I(J+K)=\{i(j+k):i\in I, j\in J, k\in K\}$, $$I(J+K)\subset IJ_IK.$$ We therefore have equality.
+\end{proof}

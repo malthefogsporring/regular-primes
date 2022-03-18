@@ -1,1 +1,121 @@
-\chapter{Regular Primes}
+\chapter{Ideal classes}\label{sec-regular-primes}
+In this section, we prove that number rings have Property II, finishing the proof of Fermat's Last Theorem for regular primes. This exposition will be inspired by Chapter 5 of \cite{NumberFields}. We will end with a few notes on proving primes are regular. 
+
+\section{The ideal class group}
+In this section we will prove that all number rings have \textbf{Property II}.  We have already shown that the fractional ideals of a number ring form an abelian group. Recall we defined an equivalence relation on ideals of $R$ as $$I\sim J\iff aI=bJ\text{ for some }a,b\in R.$$
+Equivalently, the relation is $$I\sim J \iff I=kJ \text{ for some } k\in K$$ where $K$ is the field of fractions of $R$. In fact, we will define this equivalence relation on fractional ideals. Note that since $cM\subset R$ for each fractional ideal $M$ and some $c\in R$, each equivalence class has an integral representation, so the set of equivalence classes is the same whether the relation is defined on integral ideals or fractional ideals.
+
+The standard multiplication is well-defined on the equivalence classes: if $I\sim I'$ with $aI=a'I'$ and $J\sim J'$ with $bJ=b'J'$ then $abIJ=a'b'I'J'$ so $IJ\sim I'J'$. Note since $I\sim aI=\langle a\rangle I$ for any $0\neq a\in R$, $[\langle a \rangle][I]=[I]$, so $[\langle a \rangle$ must serve as the identity in this group structure. 
+Clearly, any two principal ideals, integral or not, are equivalent. Additionally, if $I$ is such that $I \sim \langle a \rangle$, then $I=k\langle a\rangle$ is itself principal. $[\langle a \rangle]$ is therefore the equivalence class $[R]$ of principal ideals. 
+
+We can now very easily prove that the equivalence classes form an abelian group when $R$ is a Dedekind domain. I give an original proof.
+
+\begin{prop}
+The set of equivalence classes of ideals  $Cl(R)=\{[I]:I\in R\}$ of a Dedekind domain $R$ with field of fractions $K$ is an abelian group.
+\end{prop}
+\begin{proof}
+We have shown the fractional ideals form an abelian group $G$ under this multiplication. The subset $H$ of principal fractional ideals forms a (normal) subgroup by the subgroup test: it is closed under multiplication since $\langle a \rangle \langle b \rangle= \langle ab\rangle$ for any $a,b\in K$, and closed under inverses since $\langle a \rangle^{-1}=\langle a^{-1}\rangle.$ Therefore the quotient group $G/H$ is abelian. The coset of a fractional ideal $I$ is $$IH=\{I\langle a\rangle :a\in K\}= [I].$$
+\end{proof}
+
+\begin{remark}
+$Cl(R)$ is called the \defn{ideal class group} of $R$. It is the trivial group if and only if every ideal of $R$ is principal, i.e., $R$ is a PID. The size of this group is therefore a measure of how far $R$ is from being a PID. Recall PIDs are UFDs. This is an if and only if statement when $R$ is a Dedekind domain \cite{Wright}. $Cl(R)$ is therefore also a measure of how close $R$ is to being a UFD.
+\end{remark}
+
+\begin{remark}\label{remark-strictly-stronger}
+We noted in the introduction that Kummer's proof of Fermat's Last Thoerem was strictly stronger than Lamé's, even when restricting his proof to only the case when $\Z[\omega]$ is a UFD. By the previous remark, if $\Z[e^{2\pi i/p}]$ is a UFD, its ideal class group is trivial, so $p$ is regular. Kummer's proof is therefore stronger than Lamé's. In fact it is \textit{strictly} stronger; Kummer himself proved that $p=23$ is regular and that $\Z[e{2\pi i/23}]$ is not a UFD.
+\end{remark}
+
+It remains to show that $Cl(R)$ is finite. We will show this for any number ring $\A\cap K$. Our first goal will be the define a norm on ideals $I$ of number rings.
+
+
+\begin{lemma}\label{norm-of-ideal-well-defined}
+Suppose $B=\A\cap K$ is a number ring and $I$ is a nonzero integral ideal. Then $B/I$ is finite.
+\end{lemma}
+\begin{proof}
+Let $\alpha\in I$ be non-zero, and let $m=N^K(\alpha)$. $m$ is an integer by \cref{norm-of-alg-int-is-integer}. We can write $m=\beta\alpha$ where $\beta$ is a product of conjugates of $\alpha$ over $\Q$. Since $\beta=\frac{m}{\alpha},$ we have $\beta\in K.$ Additionally, since $\A$ is a ring, $\beta \in \A$ - each conjugate is an algebraic integer and $\A$ is closed under multiplication. Therefore $\beta\in B$ so $m\in I$. It follows that $\langle m \rangle\subset I$, and therefore $|B/I|\leq |B/\langle m\rangle|$, which is finite by the next lemma (recall $B$ is a finitely generated free abelian group under $+$).
+\cite{NumberFields}
+\end{proof}
+
+The following lemma is an exercise in \cite{NumberFields}; I give an original proof.
+\begin{lemma}
+If $G$ is a free abelian group of rank $n$ and $m>1$ an integer, then $G/mG$ is a direct sum of $n$ groups of order $m$. In particular, $|G/mG|=m^n$.
+\end{lemma}
+\begin{proof}
+By the fundamental theorem of finitely generated abelian groups, $G\iso \Z^n$ \cite{GroupTheory}. We have an isomorphism $$\Z^n/m\Z^n\iso (\Z/m\Z)^n, \qquad [(a_1,a_2,\dots,a_n)]\mapsto ([a_1],[a_2],\dots,[a_n])$$
+This is well-defined since if $(a_1,\dots a_n)-(a_1',\dots a_n')\in m\Z^n$, then $a_i-a_i'\in m\Z$ for each $i$. It is clearly surjective, and is injective as its kernel is $\{[a_1,\dots,a_n]:a_i\in m\Z^n \text{ for each } i\}=[0,0,\dots,0]$.
+Note $|(\Z/m\Z)^n|=|\Z/m\Z|^n=m^n$ as required.
+\end{proof}
+
+This justifies defining the \defn{norm} of an ideal $I$ of a number ring $B$ (or more generally a Dedekind domain satisfying the conclusion of \cref{norm-of-ideal-well-defined}) as the cardinality $|B/I|$.
+
+We regrettably do not have time to explore the background knowledge necessary to fully prove these next two non-trivial results. 
+
+\begin{lemma}\label{finitely-many-prime-ideals}
+Given a number ring $B$ and a positive integer $n$, there are only finitely many prime ideals $P$ of $B$ such that $||P||=n$.
+\end{lemma}
+\begin{proof}
+Omitted. See \cite{NumberFields}.
+\end{proof}
+
+\begin{lemma}\label{ideals-and-norms}
+The norm of ideals $I,J$ of a number ring $B=\A\cap K$ satifies the following properties:
+\begin{enumerate}[(1)]
+    \item $||IJ||=||I|| ||J||$
+    \item For any $0\neq \alpha\in B$, $|N^K(\alpha)|=||\langle \alpha \rangle||$
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[(1)]
+    \item We may assume that $I$ and $J$ are prime: the general result will then follow from unique factorisation of general ideals:
+    $$||I||=||P_1^{a_1}\dots P_n^{a_n}||=||P_1||^{a_1}\dots ||P_n||^{a_n}$$
+    Note $\frac{J}{IJ}\leq \frac{B}{IJ}$ as groups. By Lagrange's theorem and the third isomorphism theorem (see \cite{GroupTheory}),
+    $$||IJ||=\Big|\frac{B}{IJ}\Big|=\Big|\frac{B/IJ}{J/IJ}\Big||J/IJ|=|B/J||J/IJ|=||J||\cdot|J/IJ|.$$ We therefore need to show $|J/IJ|=|B/I|.$ Since $I$ is prime hence maximal, $B/I$ is a (finite) field. $J/IJ$ is a (finite) vector space over $B/I$, in particular $$(b+I)(j+IJ)=bj+IJ$$
+    is well-defined for $b\in B$ and $j\in J$. Fix nonzero $j\in J/IJ$ and consider the linear map $$f:B/I\rightarrow J/IJ, \quad[x]\mapsto [jx].$$ This map is injective since $$[jx]=[jy]\iff j(x-y)\in IJ\iff (x-y)\in I\iff [x]=[y].$$ 
+    
+    Letting $J'=jJ^{-1}$, we note $jB=JJ'$. It follows that $$I\subset I+J'$$
+    is a proper inclusion, so by the maximality of $I$, $I+J'=B$. Since prime ideals of Dedekind domains are maximal, and $I\subset I+J'$ is a proper inclusion, $J'+I=B$. Multiplying by $J$ gives 
+    $$J(J'+I)=(JJ'+IJ)=J$$ where we have used the distributive property of ideal multiplication (\cref{distributive-law-for-ideals}). From this it in fact follows that $im(f)=(jB+IJ)/\sim= J/\sim=J/IJ$ so $f$ is surjective. We have therefore found an isomorphism $B/I\iso J/IJ$, so in particular, $|B/I|=|J/IJ|$ as required.
+    \cite{Torres}
+    \item Proof omitted. See \cite{NumberFields}.
+\end{enumerate}\end{proof}
+
+We are now ready to tie the story back to the ideal class group. The next two lemmas will connect the ideal norm to the ideal class group by showing that we can always uniformly choose "small" (in norm) representatives for every ideal class. Armed with \cref{finitely-many-prime-ideals}, we can then show that only finitely many ideals are small enough to represent an ideal class.
+\begin{lemma}
+Let $B=\A\cap K$ be a number ring. There is a positive real number $\lambda$ such that every nonzero ideal $I$ of $B$ contains a nonzero element $\alpha$ with
+$$|N^K(\alpha)|\leq \lambda ||I||.$$
+\end{lemma}
+\begin{proof}
+Let $\alpha_1,\dots, \alpha_n$ be an integral basis of $B$ and let $\sigma_1,\dots,\sigma_n$ be the $n$ embeddings of $B$ in $\C$ fixing $\Q$. Let
+$$\lambda=\prod_{i=1}^n\sum_{j=1}^n|\sigma_i(\alpha_j)|$$
+Now let $m$ be the unique integer such that $$m^n\leq ||I||< (m+1)^n.$$ Since $B$ is a free $\Z-$module with basis $\alpha_1,\dots \alpha_n$, there are $(m+1)^n$ unique elements
+$$\sum_{i=1}^n m_i\alpha_i \in B :0\leq m_i\leq m$$
+Since $||I||=|B/I|<(m+1)^n$, two of these elements are congruent $\mod I$, so their difference $\alpha$ lies in $I$. Note $\alpha$ can be written
+$\alpha=\sum_{j=1}^nm_j\alpha_j$ for some $0\leq |m_j|\leq m$.
+Now $$|N(\alpha)|=\prod_{i=1}^n |\sigma_i(\alpha)|=\prod_{i=1}^n |\sum_{j=1}^nm_i\sigma_i(\alpha_j)|\leq \prod_{i=1}^n \sum_{j=1}^n|m_i||\sigma_i(\alpha_j)| \text{ (triangle inequality)}$$
+$$\leq m^n\lambda \text{(since }|m_i|\leq m\text{)} \leq \lambda||I||.$$
+\cite{NumberFields}
+\end{proof}
+
+\begin{lemma}
+Every ideal class of a number ring $B$ contains an ideal $J$ with
+$$||J||\leq \lambda$$
+\end{lemma}
+\begin{proof}
+Let $[I]$ be an ideal class and $[I^{-1}]$ be its inverse. By the previous lemma, find an $\alpha\in I^{-1}$ s.t. $$|N(\alpha)|\leq \lambda ||I^{-1}||.$$ $II{^-1}=\langle a \rangle$, a principal ideal. Since every two principal ideals are equivalent, write $\langle \alpha \rangle =b\langle a \rangle$ and let $J=bI$ so $JI^{-1}=\langle \alpha \rangle$. By \cref{ideals-and-norms},
+$$|N(\alpha)|=||\langle \alpha \rangle||=||I^{-1}|| ||J||\leq \lambda ||I^{-1}||\implies ||J||\leq \lambda.$$\cite{NumberFields}
+\end{proof}
+
+\begin{theorem}[Property II for number rings]
+The ideal class group of a number ring is finite.
+\end{theorem}
+\begin{proof}
+Every equivalence class is represented by an ideal $J$ with $||J||\leq \lambda$ for a fixed $\lambda.$ There are only finitely many such $J$'s: in particular, in the prime decomposition of such $J$ we have by \cref{ideals-and-norms} $$||J||=\prod_{i=1}^n ||P_i||^{a_i}.$$ Therefore no prime ideal $P$ in the decomposition of such $J$ can have a power $a$ greater than $\frac{\ln ||J||}{\ln ||P||}$. There are only finitely many prime ideals of a given norm by \cref{finitely-many-prime-ideals}, therefore only finitely many prime ideals of norm less than or equal to $J$. There are therefore only finitely many possible prime decompositions of such $J$, hence only finitely many such $J$, hence only finitely many classes.
+\cite{NumberFields}
+\end{proof}
+%Note if $S$ is a subring of $R$, then there is a set injection $$f:\mathcal{I}_s\rightarrow Cl(R)$$ $$[I]\mapsto [RI]$$ Therefore a subring always has "fewer" equivalence classes than its parent ring. In particular, we will get Property II for number rings if we prove
+%\section{Some regular primes}
+
+%(...)
+\section{Regular primes}
+We have now completed Kummer's proof of Fermat's Last Theorem for Type I solutions. Kummer also found a proof for Type II solutions, completing the proof \cite{Wright}. Of course, this proof is not of much use without knowing which primes are regular. This turns out to be doable; Kummer himself managed to classify the primes below $100$. He also showed that a prime $p$ is regular if and only if it does not divide the numerators of the \defn{Bernoulli numbers} $B_0,B_2,\dots,B_{p-1}$ (CITE: \url{https://mathworld.wolfram.com/RegularPrime.html}). The Bernoulli numbers can be defined, among other ways, from the generating function
+$$\frac{x}{e^x-1}=\sum_{i=0}^n \frac{B_nx^n}{n!}.$$ This thus turns the problem of classifying primes into an analytic one, so we can use the full arsenal of analytic number theory to calculate Bernoulli numbers, and hence classify primes. In 1978, Wagstaff classified all the primes less than $125000$, finding that just over $39\%$ of primes were irregular \cite{125000}. Kummer's proof is therefore applicable to a large class of primes. Despite this, it is only known that there are infinitely many irregular primes, and not known whether there are infinitely many regular primes \cite{125000}.

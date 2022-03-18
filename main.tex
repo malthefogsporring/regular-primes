@@ -1,5 +1,5 @@
-\documentclass[12pt]{report} 
-\usepackage[MMath]{edmaths}
+\documentclass[12pt,oneside]{report} 
+\usepackage[y4project]{edmaths}
 \flushbottom
 %\documentclass[titlepage,12pt,a4paper]{article}
 %\documentclass[12pt]{report} 
@@ -81,20 +81,25 @@
 \pagenumbering{roman}
 \maketitle
 
-\begin{abstract} ... Abstract text ... \end{abstract}
+\begin{abstract} Fermat's Last Theorem says that the equation $x^n+y^n=z^n$ has no integer solutions for $n>2$. In 1847, Ernst Kummer proved the theorem for a certain type of prime exponents, called \textit{regular primes}. We give a historically motivated account of his proof in the modern language of ideals. In particular, we show how Fermat's Last Theorem can be reformulated as a multiplicative problem in the ring $\Z[\omega]$ where $\omega=e^{2\pi i/p},$ for a prime $p$. The result is then reduced to proving that (I) the ideals of $\Z[\omega]$ factorise uniquely into \textit{prime ideals}, and (II) the equivalence classes of ideals under a certain equivalence relation is a finite abelian group. These properties are shown to follow from the fact that $\Z[\omega]$ is (I) a \textit{Dedekind domain} and (II) a \textit{number ring}.
+\end{abstract}
 \declaration
-\dedication{...dedication text...}
+\dedication{To Phoebe.}
 %\let\chapter\section\tableofcontents
 \tableofcontents
 %\addcontentsline{toc}{chapter}{Contents}
 \newpage
-\pagenumbering{arabic}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+\chapter*{Acknowledgements}
+I want to thank my supervisor, Professor James Wright, for his guidance and advice throughout this project. I also wish to express my gratitude to my parents and friends for their constant encouragement and support.
+
+\newpage\pagenumbering{arabic}
 \input{introduction}
 \input{rings}
 \input{number-fields}
 \input{dedekind}
 \input{regular-primes}
-\newpage
+\input{conclusion}
 %\addcontentsline{toc}{section}{Appendix}
 %\section*{Appendix}
 \newpage
